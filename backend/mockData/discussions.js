@@ -47,6 +47,6 @@ const discussions = [
     tags: ['react', 'redux', 'mongodb'],
     pinned: false,
   },
-];
+]
 
-module.exports = discussions;
+module.exports = discussions

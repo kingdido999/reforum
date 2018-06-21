@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import styles from './styles';
+import React, { Component } from 'react'
+import styles from './styles'
 
 const Logo = () => {
   return (
@@ -30,7 +30,7 @@ const Logo = () => {
       </div>
       <div className={styles.logoTitle}>ReForum</div>
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

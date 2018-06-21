@@ -2,8 +2,8 @@
  * user profile apis
  */
 
-import axios from 'axios';
+import axios from 'axios'
 
 export const fetchUserProfileApi = userSlug => {
-  return axios.get(`/api/user/profile/${userSlug}`);
-};
+  return axios.get(`/api/user/profile/${userSlug}`)
+}

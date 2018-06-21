@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import classnames from 'classnames';
-import Moment from 'moment';
-import styles from './styles';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import classnames from 'classnames'
+import Moment from 'moment'
+import styles from './styles'
 
-import Tag from 'Components/Tag';
+import Tag from 'Components/Tag'
 
 class DiscussionBox extends Component {
   render () {
@@ -18,10 +18,10 @@ class DiscussionBox extends Component {
       tags,
       link,
       userProfile,
-    } = this.props;
+    } = this.props
 
-    const postTime = Moment(time);
-    const timeDisplay = postTime.from(Moment());
+    const postTime = Moment(time)
+    const timeDisplay = postTime.from(Moment())
 
     return (
       <div className={styles.container}>
@@ -62,7 +62,7 @@ class DiscussionBox extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -77,7 +77,7 @@ DiscussionBox.defaultProps = {
   tags: ['react', 'redux', 'nodejs'],
   link: '',
   userProfile: false,
-};
+}
 
 DiscussionBox.propTypes = {
   discussionId: React.PropTypes.number,
@@ -90,6 +90,6 @@ DiscussionBox.propTypes = {
   tags: React.PropTypes.array,
   link: React.PropTypes.string,
   userProfile: React.PropTypes.bool,
-};
+}
 
-export default DiscussionBox;
+export default DiscussionBox

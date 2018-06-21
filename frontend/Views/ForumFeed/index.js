@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import classnames from 'classnames';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
+import classnames from 'classnames'
 
 import {
   getDiscussions,
   getPinnedDiscussions,
   updateSortingMethod,
-} from './actions';
+} from './actions'
 
-import Button from 'Components/Button';
-import FeedBox from 'Components/FeedBox';
-import SideBar from 'Components/SideBar';
+import Button from 'Components/Button'
+import FeedBox from 'Components/FeedBox'
+import SideBar from 'Components/SideBar'
 
-import appLayout from 'SharedStyles/appLayout.css';
-import styles from './styles.css';
+import appLayout from 'SharedStyles/appLayout.css'
+import styles from './styles.css'
 
 class ForumFeed extends Component {
   componentDidMount () {
-    const { currentForumId, getDiscussions, getPinnedDiscussions } = this.props;
+    const { currentForumId, getDiscussions, getPinnedDiscussions } = this.props
 
     // get the discussions and pinned discussions
-    getDiscussions(currentForumId());
-    getPinnedDiscussions(currentForumId());
+    getDiscussions(currentForumId())
+    getPinnedDiscussions(currentForumId())
   }
 
   componentDidUpdate (prevProps) {
@@ -32,14 +32,14 @@ class ForumFeed extends Component {
       currentForumId,
       getDiscussions,
       getPinnedDiscussions,
-    } = this.props;
+    } = this.props
 
     // get the discussions again
     // if the forum didn't matched
     if (prevProps.currentForum !== currentForum) {
-      const feedChanged = true;
-      getDiscussions(currentForumId(), feedChanged);
-      getPinnedDiscussions(currentForumId(), feedChanged);
+      const feedChanged = true
+      getDiscussions(currentForumId(), feedChanged)
+      getPinnedDiscussions(currentForumId(), feedChanged)
     }
   }
 
@@ -49,16 +49,16 @@ class ForumFeed extends Component {
       getDiscussions,
       updateSortingMethod,
       sortingMethod,
-    } = this.props;
+    } = this.props
 
     if (sortingMethod !== newSortingMethod) {
-      updateSortingMethod(newSortingMethod);
-      getDiscussions(currentForumId(), false, true);
+      updateSortingMethod(newSortingMethod)
+      getDiscussions(currentForumId(), false, true)
     }
   }
 
   renderNewDiscussionButtion () {
-    const { currentForum } = this.props;
+    const { currentForum } = this.props
 
     return (
       <div
@@ -73,7 +73,7 @@ class ForumFeed extends Component {
           </Button>
         </Link>
       </div>
-    );
+    )
   }
 
   render () {
@@ -85,10 +85,10 @@ class ForumFeed extends Component {
       fetchingPinnedDiscussions,
       sortingMethod,
       error,
-    } = this.props;
+    } = this.props
 
     if (error) {
-      return <div className={classnames(styles.errorMsg)}>{error}</div>;
+      return <div className={classnames(styles.errorMsg)}>{error}</div>
     }
 
     return (
@@ -123,7 +123,7 @@ class ForumFeed extends Component {
           <SideBar currentForum={currentForum} />
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -134,9 +134,9 @@ export default connect(
       currentForumId: () => {
         const currentForumObj = _.find(state.app.forums, {
           forum_slug: state.app.currentForum,
-        });
-        if (currentForumObj) return currentForumObj._id;
-        else return null;
+        })
+        if (currentForumObj) return currentForumObj._id
+        else return null
       },
       fetchingDiscussions: state.feed.fetchingDiscussions,
       discussions: state.feed.discussions,
@@ -144,7 +144,7 @@ export default connect(
       sortingMethod: state.feed.sortingMethod,
       pinnedDiscussions: state.feed.pinnedDiscussions,
       error: state.feed.error,
-    };
+    }
   },
   dispatch => {
     return {
@@ -161,14 +161,14 @@ export default connect(
             sortingMethod,
             sortingChanged
           )
-        );
+        )
       },
       getPinnedDiscussions: (currentForumId, feedChanged) => {
-        dispatch(getPinnedDiscussions(currentForumId, feedChanged));
+        dispatch(getPinnedDiscussions(currentForumId, feedChanged))
       },
       updateSortingMethod: method => {
-        dispatch(updateSortingMethod(method));
+        dispatch(updateSortingMethod(method))
       },
-    };
+    }
   }
-)(ForumFeed);
+)(ForumFeed)

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Link, IndexLink } from 'react-router';
-import classnames from 'classnames';
-import _ from 'lodash';
-import styles from './styles';
+import React, { Component } from 'react'
+import { Link, IndexLink } from 'react-router'
+import classnames from 'classnames'
+import _ from 'lodash'
+import styles from './styles'
 
 class NavigationBar extends Component {
   render () {
-    const { navigationLinks } = this.props;
+    const { navigationLinks } = this.props
 
     if (navigationLinks) {
       return (
@@ -23,7 +23,7 @@ class NavigationBar extends Component {
                     Home
                   </IndexLink>
                 </li>
-              );
+              )
             }
 
             return (
@@ -36,13 +36,13 @@ class NavigationBar extends Component {
                   {link.name}
                 </Link>
               </li>
-            );
+            )
           })}
         </ul>
-      );
+      )
     }
 
-    return null;
+    return null
   }
 }
 
@@ -54,10 +54,10 @@ NavigationBar.defaultProps = {
       link: '/',
     },
   ],
-};
+}
 
 NavigationBar.propTypes = {
   navigationLinks: React.PropTypes.array,
-};
+}
 
-export default NavigationBar;
+export default NavigationBar

@@ -23,6 +23,6 @@ const opinions = [
     date: 1486450269704,
     content: 'These discussions!!!',
   },
-];
+]
 
-module.exports = opinions;
+module.exports = opinions

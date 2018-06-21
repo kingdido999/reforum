@@ -1,44 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import classnames from 'classnames';
-import appLayout from 'SharedStyles/appLayout.css';
-import styles from './styles.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
+import classnames from 'classnames'
+import appLayout from 'SharedStyles/appLayout.css'
+import styles from './styles.css'
 
 // components used in this view
-import Profile from 'Components/UserProfile/Profile';
-import FeedBox from 'Components/FeedBox';
+import Profile from 'Components/UserProfile/Profile'
+import FeedBox from 'Components/FeedBox'
 
 // actions
-import { fetchUserProfile } from './actions';
+import { fetchUserProfile } from './actions'
 
 class UserProfile extends Component {
   componentDidMount () {
-    const { fetchUserProfile } = this.props;
-    const { username } = this.props.params;
-    fetchUserProfile(username);
+    const { fetchUserProfile } = this.props
+    const { username } = this.props.params
+    fetchUserProfile(username)
   }
 
   componentWillReceiveProps (newProps) {
     // fetch profile if different username
-    const { username: oldUsername } = this.props.params;
-    const { username: futureUsername } = newProps.params;
+    const { username: oldUsername } = this.props.params
+    const { username: futureUsername } = newProps.params
 
     // only update if different usernames
     if (oldUsername !== futureUsername) {
-      const { fetchUserProfile } = this.props;
-      fetchUserProfile(futureUsername);
+      const { fetchUserProfile } = this.props
+      fetchUserProfile(futureUsername)
     }
   }
 
   render () {
-    const { fetchingProfile, profile, error } = this.props;
+    const { fetchingProfile, profile, error } = this.props
 
     if (error) {
-      return <div className={styles.errorMsg}>{error}</div>;
+      return <div className={styles.errorMsg}>{error}</div>
     }
 
-    const { name, username, avatarUrl, github, discussions } = profile;
+    const { name, username, avatarUrl, github, discussions } = profile
 
     if (fetchingProfile) {
       return (
@@ -47,7 +47,7 @@ class UserProfile extends Component {
         >
           Loading users profile ...
         </div>
-      );
+      )
     }
 
     return (
@@ -67,7 +67,7 @@ class UserProfile extends Component {
           <FeedBox userProfile type='general' discussions={discussions} />
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -77,13 +77,13 @@ export default connect(
       fetchingProfile: state.userProfile.fetchingProfile,
       profile: state.userProfile.profile,
       error: state.userProfile.error,
-    };
+    }
   },
   dispatch => {
     return {
       fetchUserProfile: userSlug => {
-        dispatch(fetchUserProfile(userSlug));
+        dispatch(fetchUserProfile(userSlug))
       },
-    };
+    }
   }
-)(UserProfile);
+)(UserProfile)

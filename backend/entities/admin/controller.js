@@ -1,10 +1,10 @@
-const waterfall = require('async/waterfall');
+const waterfall = require('async/waterfall')
 
 // models
-const Discussion = require('../discussion/model');
-const Opinion = require('../opinion/model');
-const Forum = require('../forum/model');
-const User = require('../user/model');
+const Discussion = require('../discussion/model')
+const Opinion = require('../opinion/model')
+const Forum = require('../forum/model')
+const User = require('../user/model')
 
 /**
  * get the information for admin dashboard
@@ -16,42 +16,42 @@ const getAdminDashInfo = () => {
       [
         callback => {
           Discussion.count().exec((error, count) => {
-            callback(null, { discussionCount: count });
-          });
+            callback(null, { discussionCount: count })
+          })
         },
         (lastResult, callback) => {
           Opinion.count().exec((error, count) => {
-            callback(null, Object.assign(lastResult, { opinionCount: count }));
-          });
+            callback(null, Object.assign(lastResult, { opinionCount: count }))
+          })
         },
         (lastResult, callback) => {
           Forum.count().exec((error, count) => {
-            callback(null, Object.assign(lastResult, { forumCount: count }));
-          });
+            callback(null, Object.assign(lastResult, { forumCount: count }))
+          })
         },
         (lastResult, callback) => {
           User.count().exec((error, count) => {
-            callback(null, Object.assign(lastResult, { userCount: count }));
-          });
+            callback(null, Object.assign(lastResult, { userCount: count }))
+          })
         },
         (lastResult, callback) => {
           Forum.find({})
             .sort({ date: -1 })
             .lean()
             .exec((error, forums) => {
-              callback(null, Object.assign(lastResult, { forums }));
-            });
+              callback(null, Object.assign(lastResult, { forums }))
+            })
         },
       ],
       (error, result) => {
         if (error) {
-          console.log(error);
-          reject(error);
-        } else resolve(result);
+          console.log(error)
+          reject(error)
+        } else resolve(result)
       }
-    );
-  });
-};
+    )
+  })
+}
 
 /**
  * create a new forum
@@ -64,29 +64,29 @@ const createForum = ({ forum_name, forum_slug }) => {
     // check if the forum exists
     Forum.findOne({ forum_slug }).exec((error, forum) => {
       if (error) {
-        console.log(error);
-        reject({ serverError: true });
+        console.log(error)
+        reject({ serverError: true })
       } else if (forum) {
-        reject({ alreadyExists: true });
+        reject({ alreadyExists: true })
       } else {
         // forum does not exists, so create a new one
         const newForum = new Forum({
           forum_slug,
           forum_name,
-        });
+        })
 
         newForum.save(error => {
           if (error) {
-            console.log(error);
-            reject({ created: false });
+            console.log(error)
+            reject({ created: false })
           } else {
-            resolve(Object.assign({}, newForum, { created: true }));
+            resolve(Object.assign({}, newForum, { created: true }))
           }
-        });
+        })
       }
-    });
-  });
-};
+    })
+  })
+}
 
 /**
  * delete an entire forum
@@ -98,30 +98,30 @@ const deleteForum = ({ forum_id }) => {
     // first remove any discussion regarding the forum
     Discussion.remove({ forum_id }).exec(error => {
       if (error) {
-        console.log(error);
-        reject({ deleted: false });
+        console.log(error)
+        reject({ deleted: false })
       } else {
         // remove any opinion regarding the forum
         Opinion.remove({ forum_id }).exec(error => {
           if (error) {
-            console.log(error);
-            reject({ deleted: false });
+            console.log(error)
+            reject({ deleted: false })
           } else {
             // now we can remove the forum
             Forum.remove({ _id: forum_id }).exec(error => {
               if (error) {
-                console.log(error);
-                reject({ deleted: false });
+                console.log(error)
+                reject({ deleted: false })
               } else {
-                resolve({ deleted: true });
+                resolve({ deleted: true })
               }
-            });
+            })
           }
-        });
+        })
       }
-    });
-  });
-};
+    })
+  })
+}
 
 /**
  * delete an user
@@ -133,30 +133,30 @@ const deleteUser = ({ user_id }) => {
     // first we need to remvoe any discussion the user created
     Discussion.remove({ user_id }).exec(error => {
       if (error) {
-        console.log(error);
-        reject({ deleted: false });
+        console.log(error)
+        reject({ deleted: false })
       } else {
         // now we need to remove any opinions that are created by the user
         Opinion.remove({ user_id }).exec(error => {
           if (error) {
-            console.log(error);
-            reject({ deleted: false });
+            console.log(error)
+            reject({ deleted: false })
           } else {
             // finally we can remove the user
             User.remove({ _id: user_id }).exec(error => {
               if (error) {
-                console.log(error);
-                reject({ deleted: false });
+                console.log(error)
+                reject({ deleted: false })
               } else {
-                resolve({ deleted: true });
+                resolve({ deleted: true })
               }
-            });
+            })
           }
-        });
+        })
       }
-    });
-  });
-};
+    })
+  })
+}
 
 /**
  * delete a single discussion
@@ -168,22 +168,22 @@ const deleteDiscussion = ({ discussion_id }) => {
     // first we need to remove any opinion regarding the discussion
     Opinion.remove({ discussion_id }).exec(error => {
       if (error) {
-        console.log(error);
-        reject({ deleted: false });
+        console.log(error)
+        reject({ deleted: false })
       } else {
         // now we need to remove the discussion
         Discussion.remove({ _id: discussion_id }).exec(error => {
           if (error) {
-            console.log(error);
-            reject({ deleted: false });
+            console.log(error)
+            reject({ deleted: false })
           } else {
-            resolve({ deleted: true });
+            resolve({ deleted: true })
           }
-        });
+        })
       }
-    });
-  });
-};
+    })
+  })
+}
 
 module.exports = {
   getAdminDashInfo,
@@ -191,4 +191,4 @@ module.exports = {
   deleteForum,
   deleteUser,
   deleteDiscussion,
-};
+}

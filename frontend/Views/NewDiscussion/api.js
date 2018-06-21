@@ -1,5 +1,5 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export const postDiscussionApi = discussion => {
-  return axios.post('/api/discussion/newDiscussion', discussion);
-};
+  return axios.post('/api/discussion/newDiscussion', discussion)
+}

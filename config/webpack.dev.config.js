@@ -1,17 +1,17 @@
 /**
  * module dependencies for webpack dev configuration
  */
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
 // define paths
-const nodeModulesPath = path.resolve(__dirname, '../node_modules');
-const buildPath = path.resolve(__dirname, '../public', 'build');
-const mainAppPath = path.resolve(__dirname, '../frontend', 'App', 'index.js');
-const sharedStylesPath = path.resolve(__dirname, '../frontend', 'SharedStyles');
-const componentsPath = path.resolve(__dirname, '../frontend', 'Components');
-const containersPath = path.resolve(__dirname, '../frontend', 'Containers');
-const viewsPath = path.resolve(__dirname, '../frontend', 'Views');
+const nodeModulesPath = path.resolve(__dirname, '../node_modules')
+const buildPath = path.resolve(__dirname, '../public', 'build')
+const mainAppPath = path.resolve(__dirname, '../frontend', 'App', 'index.js')
+const sharedStylesPath = path.resolve(__dirname, '../frontend', 'SharedStyles')
+const componentsPath = path.resolve(__dirname, '../frontend', 'Components')
+const containersPath = path.resolve(__dirname, '../frontend', 'Containers')
+const viewsPath = path.resolve(__dirname, '../frontend', 'Views')
 
 /**
  * webpack development configuration
@@ -67,4 +67,4 @@ module.exports = {
       Views: viewsPath,
     },
   },
-};
+}

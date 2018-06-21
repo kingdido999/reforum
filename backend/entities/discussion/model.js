@@ -1,7 +1,7 @@
 /**
  * discussion model
  */
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const discussionSchema = mongoose.Schema({
   forum_id: mongoose.Schema.ObjectId,
@@ -15,6 +15,6 @@ const discussionSchema = mongoose.Schema({
   favorites: Array,
   tags: Array,
   pinned: Boolean,
-});
+})
 
-module.exports = mongoose.model('discussion', discussionSchema);
+module.exports = mongoose.model('discussion', discussionSchema)

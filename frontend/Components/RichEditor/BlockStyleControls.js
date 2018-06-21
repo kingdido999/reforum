@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import styles from './styles.css';
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import styles from './styles.css'
 
-import Button from 'Components/Button';
-import StyleButton from './StyleButton';
+import Button from 'Components/Button'
+import StyleButton from './StyleButton'
 
 class BlockStyleControls extends Component {
   render () {
-    const { onToggle, editorState, type } = this.props;
+    const { onToggle, editorState, type } = this.props
 
     const blockTypes = [
       // {label: 'H1', style: 'header-one'},
@@ -20,13 +20,13 @@ class BlockStyleControls extends Component {
       // {label: 'UL', style: 'unordered-list-item'},
       // {label: 'OL', style: 'ordered-list-item'},
       { label: 'Code Block', style: 'code-block' },
-    ];
+    ]
 
-    const selection = editorState.getSelection();
+    const selection = editorState.getSelection()
     const blockType = editorState
       .getCurrentContent()
       .getBlockForKey(selection.getStartKey())
-      .getType();
+      .getType()
 
     return (
       <div className={styles.controls}>
@@ -40,7 +40,7 @@ class BlockStyleControls extends Component {
           />
         ))}
       </div>
-    );
+    )
   }
 }
 
@@ -48,6 +48,6 @@ BlockStyleControls.propTypes = {
   onToggle: React.PropTypes.func.isRequired,
   editorState: React.PropTypes.any.isRequired,
   type: React.PropTypes.oneOf(['newDiscussion', 'newOpinion']),
-};
+}
 
-export default BlockStyleControls;
+export default BlockStyleControls

@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import Moment from 'moment';
-import styles from './styles';
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import Moment from 'moment'
+import styles from './styles'
 
-import DiscussionBox from './DiscussionBox';
+import DiscussionBox from './DiscussionBox'
 
 class FeedBox extends Component {
   renderSort () {
-    const { activeSortingMethod, onChangeSortingMethod } = this.props;
+    const { activeSortingMethod, onChangeSortingMethod } = this.props
 
     if (this.props.type === 'general') {
       return (
@@ -31,31 +31,25 @@ class FeedBox extends Component {
             Popular
           </span>
         </div>
-      );
+      )
     }
-    return null;
+    return null
   }
 
   renderEmptyDiscussionLine (loading, discussions) {
     if (!loading) {
       if (!discussions || discussions.length === 0) {
-        return <div className={styles.loading}>No discussions...</div>;
+        return <div className={styles.loading}>No discussions...</div>
       }
     }
   }
 
   render () {
-    const {
-      type,
-      loading,
-      discussions,
-      currentForum,
-      userProfile,
-    } = this.props;
+    const { type, loading, discussions, currentForum, userProfile } = this.props
 
-    let discussionBoxTitle = '';
-    if (type === 'general') discussionBoxTitle = 'Discussions';
-    if (type === 'pinned') discussionBoxTitle = 'Pinned';
+    let discussionBoxTitle = ''
+    if (type === 'general') discussionBoxTitle = 'Discussions'
+    if (type === 'pinned') discussionBoxTitle = 'Pinned'
 
     return (
       <div className={styles.container}>
@@ -87,7 +81,7 @@ class FeedBox extends Component {
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -99,7 +93,7 @@ FeedBox.defaultProps = {
   activeSortingMethod: 'date',
   onChangeSortingMethod: val => {},
   userProfile: false,
-};
+}
 
 FeedBox.propTypes = {
   type: React.PropTypes.oneOf(['general', 'pinned']),
@@ -109,6 +103,6 @@ FeedBox.propTypes = {
   activeSortingMethod: React.PropTypes.string,
   onChangeSortingMethod: React.PropTypes.func,
   userProfile: React.PropTypes.bool,
-};
+}
 
-export default FeedBox;
+export default FeedBox

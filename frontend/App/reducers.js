@@ -7,14 +7,14 @@ import {
   START_FETCHING_USER,
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
-} from './constants';
+} from './constants'
 
 const initialState = {
   fetchingForums: false,
   forums: null,
   currentForum: 'general',
   error: false,
-};
+}
 
 /**
  * reducer for top level app state
@@ -24,35 +24,35 @@ export const appReducer = (state = initialState, action) => {
     case START_FETCHING_FORUMS:
       return Object.assign({}, state, {
         fetchingForums: true,
-      });
+      })
 
     case STOP_FETCHING_FORUMS:
       return Object.assign({}, state, {
         fetchingForums: false,
-      });
+      })
 
     case FETCHING_FORUMS_SUCCESS:
       return Object.assign({}, state, {
         forums: action.payload,
         fetchingForums: false,
         error: false,
-      });
+      })
 
     case FETCHING_FORUMS_FAILURE:
       return Object.assign({}, state, {
         fetchingForums: false,
         error: 'Unable to fetch forums',
-      });
+      })
 
     case UPDATECURRENTFORUM:
       return Object.assign({}, state, {
         currentForum: action.payload,
-      });
+      })
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 /**
  * reducer for user
@@ -70,14 +70,14 @@ const initialUserState = {
   githubLocation: null,
   githubBio: null,
   role: null,
-};
+}
 
 export const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case START_FETCHING_USER:
       return Object.assign({}, state, {
         fetchUser: true,
-      });
+      })
 
     case FETCHING_USER_SUCCESS:
       const {
@@ -90,7 +90,7 @@ export const userReducer = (state = initialUserState, action) => {
         githubUrl,
         githubLocation,
         role,
-      } = action.payload;
+      } = action.payload
 
       return (
         Object.assign({}, state),
@@ -108,15 +108,15 @@ export const userReducer = (state = initialUserState, action) => {
           githubLocation,
           role,
         }
-      );
+      )
 
     case FETCHING_USER_FAILURE:
       return Object.assign({}, initialUserState, {
         fetchingUser: false,
         error: 'Unable to fetch user!',
-      });
+      })
 
     default:
-      return state;
+      return state
   }
-};
+}

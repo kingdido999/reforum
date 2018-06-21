@@ -8,13 +8,9 @@ import {
   DELETE_FORUM,
   DELETE_FORUM_SUCCESS,
   DELETE_FORUM_FAILURE,
-} from './constants';
+} from './constants'
 
-import {
-  getAdminDashboardInfoAPI,
-  createForumAPI,
-  deleteForumAPI,
-} from './api';
+import { getAdminDashboardInfoAPI, createForumAPI, deleteForumAPI } from './api'
 
 /**
  * get all the info needed for dashboard
@@ -22,14 +18,14 @@ import {
  */
 export const getAdminDashboardInfo = () => {
   return (dispatch, getState) => {
-    dispatch({ type: GET_ALL_INFO_START });
+    dispatch({ type: GET_ALL_INFO_START })
 
     getAdminDashboardInfoAPI().then(
       data => dispatch({ type: GET_ALL_INFO_SUCCESS, payload: data.data }),
       error => dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
-    );
-  };
-};
+    )
+  }
+}
 
 /**
  * create a new forum
@@ -38,7 +34,7 @@ export const getAdminDashboardInfo = () => {
  */
 export const createForum = forumObj => {
   return (dispatch, getState) => {
-    dispatch({ type: CREATE_FORUM });
+    dispatch({ type: CREATE_FORUM })
 
     // call the create forum api
     createForumAPI(forumObj).then(
@@ -47,45 +43,45 @@ export const createForum = forumObj => {
         getAdminDashboardInfoAPI().then(
           data => {
             // data is refreshed
-            dispatch({ type: GET_ALL_INFO_SUCCESS, payload: data.data });
+            dispatch({ type: GET_ALL_INFO_SUCCESS, payload: data.data })
 
             // check if the forum was created
             if (forumData.data.created) {
-              dispatch({ type: CREATE_FORUM_SUCCESS });
-            } else dispatch({ type: CREATE_FORUM_FAILURE });
+              dispatch({ type: CREATE_FORUM_SUCCESS })
+            } else dispatch({ type: CREATE_FORUM_FAILURE })
           },
           error =>
             dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
-        );
+        )
       },
       error => dispatch({ type: CREATE_FORUM_FAILURE })
-    );
-  };
-};
+    )
+  }
+}
 
 export const deleteForum = forumId => {
   return (dispatch, getState) => {
-    dispatch({ type: DELETE_FORUM });
+    dispatch({ type: DELETE_FORUM })
 
     deleteForumAPI(forumId).then(
       forumData => {
-        dispatch({ type: GET_ALL_INFO_START });
+        dispatch({ type: GET_ALL_INFO_START })
 
         // get admin info again to refresh the infos
         getAdminDashboardInfoAPI().then(
           data => {
-            dispatch({ type: GET_ALL_INFO_SUCCESS, payload: data.data });
+            dispatch({ type: GET_ALL_INFO_SUCCESS, payload: data.data })
 
             // check if th eforum was deleted
             if (forumData.data.deleted) {
-              dispatch({ type: DELETE_FORUM_SUCCESS });
-            } else dispatch({ type: DELETE_FORUM_FAILURE });
+              dispatch({ type: DELETE_FORUM_SUCCESS })
+            } else dispatch({ type: DELETE_FORUM_FAILURE })
           },
           error =>
             dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
-        );
+        )
       },
       error => dispatch({ type: DELETE_FORUM_FAILURE })
-    );
-  };
-};
+    )
+  }
+}

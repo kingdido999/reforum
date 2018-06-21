@@ -1,5 +1,5 @@
 // models
-const Opinion = require('./model');
+const Opinion = require('./model')
 
 /**
  * get all opinion regarding a single discussion
@@ -13,13 +13,13 @@ const getAllOpinions = discussion_id => {
       .sort({ date: -1 })
       .exec((error, opinions) => {
         if (error) {
-          console.log(error);
-          reject(error);
-        } else if (!opinions) reject(null);
-        else resolve(opinions);
-      });
-  });
-};
+          console.log(error)
+          reject(error)
+        } else if (!opinions) reject(null)
+        else resolve(opinions)
+      })
+  })
+}
 
 /**
  * create an opinion regarding a discussion
@@ -39,22 +39,22 @@ const createOpinion = ({ forum_id, discussion_id, user_id, content }) => {
       user: user_id,
       content,
       date: new Date(),
-    });
+    })
 
     newOpinion.save(error => {
       if (error) {
-        console.log(error);
-        reject(error);
+        console.log(error)
+        reject(error)
       } else {
-        resolve(newOpinion);
+        resolve(newOpinion)
       }
-    });
-  });
-};
+    })
+  })
+}
 
 const updateOpinion = opinion_id => {
   // TODO: implement update for opinion
-};
+}
 
 /**
  * delete a single opinion
@@ -65,16 +65,16 @@ const deleteOpinion = opinion_id => {
   return new Promise((resolve, reject) => {
     Opinion.remove({ _id: opinion_id }).exec(error => {
       if (error) {
-        console.log(error);
-        reject(error);
-      } else resolve('deleted');
-    });
-  });
-};
+        console.log(error)
+        reject(error)
+      } else resolve('deleted')
+    })
+  })
+}
 
 module.exports = {
   getAllOpinions,
   createOpinion,
   updateOpinion,
   deleteOpinion,
-};
+}

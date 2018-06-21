@@ -1,12 +1,12 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import classnames from 'classnames';
+import _ from 'lodash'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
+import classnames from 'classnames'
 
-import RichEditor from 'Components/RichEditor';
-import PinButton from 'Components/NewDiscussion/PinButton';
-import TagsInput from 'Components/NewDiscussion/TagsInput';
+import RichEditor from 'Components/RichEditor'
+import PinButton from 'Components/NewDiscussion/PinButton'
+import TagsInput from 'Components/NewDiscussion/TagsInput'
 
 import {
   postDiscussion,
@@ -14,51 +14,51 @@ import {
   updateDiscussionContent,
   updateDiscussionPinStatus,
   updateDiscussionTags,
-} from './actions';
+} from './actions'
 
-import styles from './styles.css';
-import appLayout from 'SharedStyles/appLayout.css';
+import styles from './styles.css'
+import appLayout from 'SharedStyles/appLayout.css'
 
 class NewDiscussion extends Component {
   constructor (props) {
-    super(props);
+    super(props)
 
     this.state = {
       forumId: null,
       userId: null,
       fatalError: null,
-    };
+    }
   }
 
   componentDidMount () {
-    const { user, currentForum, forums } = this.props;
+    const { user, currentForum, forums } = this.props
 
-    this.setUserAndForumID(user, forums, currentForum);
+    this.setUserAndForumID(user, forums, currentForum)
   }
 
   componentWillReceiveProps (nextProps) {
-    const { user, currentForum, forums } = nextProps;
+    const { user, currentForum, forums } = nextProps
 
-    this.setUserAndForumID(user, forums, currentForum);
+    this.setUserAndForumID(user, forums, currentForum)
   }
 
   setUserAndForumID (user, forums, currentForum) {
-    const forumId = _.find(forums, { forum_slug: currentForum });
+    const forumId = _.find(forums, { forum_slug: currentForum })
     if (forumId) {
-      const currentForumId = forumId._id;
+      const currentForumId = forumId._id
       this.setState({
         forumId: currentForumId,
         userId: user._id,
-      });
+      })
     } else {
       this.setState({
         fatalError: 'Invalid forum buddy, go for the right one!',
-      });
+      })
     }
   }
 
   renderEditor () {
-    const { authenticated, role } = this.props.user;
+    const { authenticated, role } = this.props.user
 
     const {
       updateDiscussionTitle,
@@ -67,11 +67,11 @@ class NewDiscussion extends Component {
       updateDiscussionTags,
       postDiscussion,
       currentForum,
-    } = this.props;
+    } = this.props
 
-    const { title, content, tags, pinned } = this.props.newDiscussion;
+    const { title, content, tags, pinned } = this.props.newDiscussion
 
-    const { forumId, userId } = this.state;
+    const { forumId, userId } = this.state
 
     // only show the editor when user is authenticated
     if (authenticated) {
@@ -83,7 +83,7 @@ class NewDiscussion extends Component {
           placeholder={'Discussion title...'}
           value={title}
           onChange={event => {
-            updateDiscussionTitle(event.target.value);
+            updateDiscussionTitle(event.target.value)
           }}
         />,
         role === 'admin' && (
@@ -91,7 +91,7 @@ class NewDiscussion extends Component {
             key={'pinned'}
             value={pinned}
             onChange={value => {
-              updateDiscussionPinStatus(value);
+              updateDiscussionPinStatus(value)
             }}
           />
         ),
@@ -99,7 +99,7 @@ class NewDiscussion extends Component {
           key={'tags'}
           value={tags}
           onChange={tags => {
-            updateDiscussionTags(tags);
+            updateDiscussionTags(tags)
           }}
         />,
         <RichEditor
@@ -107,39 +107,39 @@ class NewDiscussion extends Component {
           type='newDiscussion'
           value={content}
           onChange={value => {
-            updateDiscussionContent(value);
+            updateDiscussionContent(value)
           }}
           onSave={() => {
-            postDiscussion(userId, forumId, currentForum);
+            postDiscussion(userId, forumId, currentForum)
           }}
         />,
-      ];
+      ]
     }
 
     return (
       <div className={classnames(appLayout.constraintWidth, styles.signInMsg)}>
         Please sign in before posting a new discussion.
       </div>
-    );
+    )
   }
 
   render () {
-    const { fatalError } = this.state;
+    const { fatalError } = this.state
 
     if (fatalError) {
       return (
         <div className={classnames(styles.errorMsg, styles.fatalError)}>
           {fatalError}
         </div>
-      );
+      )
     }
 
-    const { currentForum } = this.props;
+    const { currentForum } = this.props
     const {
       errorMsg,
       postingSuccess,
       postingDiscussion,
-    } = this.props.newDiscussion;
+    } = this.props.newDiscussion
 
     return (
       <div className={classnames(appLayout.constraintWidth, styles.content)}>
@@ -162,7 +162,7 @@ class NewDiscussion extends Component {
           <div className={styles.postingMsg}>Posting discussion...</div>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -173,25 +173,25 @@ export default connect(
       forums: state.app.forums,
       currentForum: state.app.currentForum,
       newDiscussion: state.newDiscussion,
-    };
+    }
   },
   dispatch => {
     return {
       postDiscussion: (userId, forumId, currentForum) => {
-        dispatch(postDiscussion(userId, forumId, currentForum));
+        dispatch(postDiscussion(userId, forumId, currentForum))
       },
       updateDiscussionTitle: value => {
-        dispatch(updateDiscussionTitle(value));
+        dispatch(updateDiscussionTitle(value))
       },
       updateDiscussionContent: value => {
-        dispatch(updateDiscussionContent(value));
+        dispatch(updateDiscussionContent(value))
       },
       updateDiscussionPinStatus: value => {
-        dispatch(updateDiscussionPinStatus(value));
+        dispatch(updateDiscussionPinStatus(value))
       },
       updateDiscussionTags: value => {
-        dispatch(updateDiscussionTags(value));
+        dispatch(updateDiscussionTags(value))
       },
-    };
+    }
   }
-)(NewDiscussion);
+)(NewDiscussion)

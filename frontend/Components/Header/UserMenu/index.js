@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import classnames from 'classnames';
-import onClickOutside from 'react-onclickoutside';
-import styles from './styles';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import classnames from 'classnames'
+import onClickOutside from 'react-onclickoutside'
+import styles from './styles'
 
-import Button from 'Components/Button';
+import Button from 'Components/Button'
 
 class UserMenu extends Component {
   constructor (props) {
-    super(props);
-    this.state = { activeSubMenu: false };
-    this.toggleSubMenu = this.toggleSubMenu.bind(this);
+    super(props)
+    this.state = { activeSubMenu: false }
+    this.toggleSubMenu = this.toggleSubMenu.bind(this)
   }
 
   handleClickOutside () {
-    this.setState({ activeSubMenu: false });
+    this.setState({ activeSubMenu: false })
   }
 
   toggleSubMenu () {
     this.setState(prevState => {
-      return { activeSubMenu: !prevState.activeSubMenu };
-    });
+      return { activeSubMenu: !prevState.activeSubMenu }
+    })
   }
 
   renderSubMenu () {
-    const { activeSubMenu } = this.state;
-    const { signedIn, gitHandler } = this.props;
+    const { activeSubMenu } = this.state
+    const { signedIn, gitHandler } = this.props
 
     if (activeSubMenu) {
       return (
@@ -63,14 +63,14 @@ class UserMenu extends Component {
             </a>
           )}
         </div>
-      );
+      )
     }
 
-    return null;
+    return null
   }
 
   render () {
-    const { signedIn, userName, avatar, signOutAction } = this.props;
+    const { signedIn, userName, avatar, signOutAction } = this.props
 
     if (signedIn) {
       return (
@@ -85,7 +85,7 @@ class UserMenu extends Component {
           </div>
           {this.renderSubMenu()}
         </div>
-      );
+      )
     }
 
     return (
@@ -100,7 +100,7 @@ class UserMenu extends Component {
 
         {this.renderSubMenu()}
       </div>
-    );
+    )
   }
 }
 
@@ -109,13 +109,13 @@ UserMenu.defaultProps = {
   userName: '',
   gitHandler: '',
   avatar: '',
-};
+}
 
 UserMenu.propTypes = {
   signedIn: React.PropTypes.bool.isRequired,
   userName: React.PropTypes.string,
   gitHandler: React.PropTypes.string,
   avatar: React.PropTypes.string,
-};
+}
 
-export default onClickOutside(UserMenu);
+export default onClickOutside(UserMenu)

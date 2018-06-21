@@ -37,6 +37,6 @@ const users = [
       'https://robohash.org/similiquealiquidmaiores.jpg?size=50x50&set=set1',
     name: 'Test User 5',
   },
-];
+]
 
-module.exports = users;
+module.exports = users

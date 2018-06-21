@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash'
 import {
   START_FETCHING_DISCUSSIONS,
   STOP_FETCHING_DISCUSSIONS,
@@ -10,8 +10,8 @@ import {
   FETCHING_PINNED_DISCUSSIONS_FAILURE,
   UPDATE_SORTING_METHOD,
   INVALID_FORUM,
-} from './constants';
-import { fetchDiscussions, fetchPinnedDiscussions } from './api';
+} from './constants'
+import { fetchDiscussions, fetchPinnedDiscussions } from './api'
 
 /**
  * find the id for current forum
@@ -20,15 +20,15 @@ import { fetchDiscussions, fetchPinnedDiscussions } from './api';
  * @return {Number}         the forum id
  */
 const findForumId = (state, forum) => {
-  const { forums } = state.app;
-  const forumId = _.find(forums, { forum_slug: forum });
+  const { forums } = state.app
+  const forumId = _.find(forums, { forum_slug: forum })
 
   if (forumId) {
-    return forumId._id;
+    return forumId._id
   } else {
-    return null;
+    return null
   }
-};
+}
 
 /**
  * action to fetch forum discussions
@@ -44,23 +44,25 @@ export const getDiscussions = (
   sortingChanged = false
 ) => {
   return (dispatch, getState) => {
-    const sortingMethod = getState().feed.sortingMethod;
+    const sortingMethod = getState().feed.sortingMethod
 
     // show the loading message when user change forum or change sorting method
-    if (feedChanged || sortingChanged) { dispatch({ type: START_FETCHING_DISCUSSIONS }); }
+    if (feedChanged || sortingChanged) {
+      dispatch({ type: START_FETCHING_DISCUSSIONS })
+    }
 
     if (!forumId) {
-      dispatch({ type: INVALID_FORUM });
+      dispatch({ type: INVALID_FORUM })
     } else {
       // start fetching discussions
       fetchDiscussions(forumId, sortingMethod).then(
         data =>
           dispatch({ type: FETCHING_DISCUSSIONS_SUCCESS, payload: data.data }),
         error => dispatch({ type: FETCHING_DISCUSSIONS_FAILURE })
-      );
+      )
     }
-  };
-};
+  }
+}
 
 /**
  * action to fetch forum pinned discussions
@@ -71,10 +73,10 @@ export const getDiscussions = (
 export const getPinnedDiscussions = (forumId, feedChanged) => {
   return (dispatch, getState) => {
     // show the loading message when user change forum
-    if (feedChanged) dispatch({ type: START_FETCHING_PINNED_DISCUSSIONS });
+    if (feedChanged) dispatch({ type: START_FETCHING_PINNED_DISCUSSIONS })
 
     if (!forumId) {
-      dispatch({ type: INVALID_FORUM });
+      dispatch({ type: INVALID_FORUM })
     } else {
       // start fetching pinned discussions
       return fetchPinnedDiscussions(forumId).then(
@@ -84,13 +86,13 @@ export const getPinnedDiscussions = (forumId, feedChanged) => {
             payload: data.data,
           }),
         error => {
-          console.log(error);
-          dispatch({ type: FETCHING_PINNED_DISCUSSIONS_FAILURE });
+          console.log(error)
+          dispatch({ type: FETCHING_PINNED_DISCUSSIONS_FAILURE })
         }
-      );
+      )
     }
-  };
-};
+  }
+}
 
 /**
  * Update sorting method
@@ -98,5 +100,5 @@ export const getPinnedDiscussions = (forumId, feedChanged) => {
  * @return {action}
  */
 export const updateSortingMethod = method => {
-  return { type: UPDATE_SORTING_METHOD, payload: method };
-};
+  return { type: UPDATE_SORTING_METHOD, payload: method }
+}

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import moment from 'moment';
-import classnames from 'classnames';
-import styles from './styles.css';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import moment from 'moment'
+import classnames from 'classnames'
+import styles from './styles.css'
 
-import PlaceholderImage from 'SharedStyles/placeholder.jpg';
-import Button from 'Components/Button';
-import RichEditor from 'Components/RichEditor';
+import PlaceholderImage from 'SharedStyles/placeholder.jpg'
+import Button from 'Components/Button'
+import RichEditor from 'Components/RichEditor'
 
 class Opinion extends Component {
   render () {
@@ -22,12 +22,12 @@ class Opinion extends Component {
       currentUserRole,
       deleteAction,
       deletingOpinion,
-    } = this.props;
+    } = this.props
 
-    let dateDisplay = moment(opDate);
-    dateDisplay = dateDisplay.from(moment());
+    let dateDisplay = moment(opDate)
+    dateDisplay = dateDisplay.from(moment())
 
-    const allowDelete = userId === currentUserId || currentUserRole === 'admin';
+    const allowDelete = userId === currentUserId || currentUserRole === 'admin'
 
     return (
       <div className={styles.container}>
@@ -52,7 +52,7 @@ class Opinion extends Component {
               className={styles.deleteButton}
               noUppercase
               onClick={() => {
-                deleteAction(opinionId);
+                deleteAction(opinionId)
               }}
             >
               <i className={classnames('fa fa-trash', styles.trashIcon)} />
@@ -70,7 +70,7 @@ class Opinion extends Component {
           <div className={styles.deletingOpinion}>Deleting Opinion ...</div>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -87,7 +87,7 @@ Opinion.defaultProps = {
   currentUserRole: 'user',
   deleteAction: () => {},
   deletingOpinion: null,
-};
+}
 
 Opinion.propTypes = {
   opinionId: React.PropTypes.string,
@@ -101,6 +101,6 @@ Opinion.propTypes = {
   currentUserRole: React.PropTypes.string,
   deleteAction: React.PropTypes.func,
   deletingOpinion: React.PropTypes.any,
-};
+}
 
-export default Opinion;
+export default Opinion

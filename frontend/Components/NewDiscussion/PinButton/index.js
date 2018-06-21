@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import styles from './styles';
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import styles from './styles'
 
-import Button from 'Components/Button';
+import Button from 'Components/Button'
 
 class PinButton extends Component {
   constructor (props) {
-    super(props);
-    this.state = { value: false };
+    super(props)
+    this.state = { value: false }
   }
 
   componentWillReceiveProps (nextProps) {
-    const { value } = nextProps;
-    this.setState({ value });
+    const { value } = nextProps
+    this.setState({ value })
   }
 
   updateValue (value) {
-    this.props.onChange(value);
-    this.setState({ value });
+    this.props.onChange(value)
+    this.setState({ value })
   }
 
   render () {
-    const { value } = this.state;
+    const { value } = this.state
 
     return (
       <div className={styles.container}>
@@ -31,7 +31,7 @@ class PinButton extends Component {
           <Button
             alwaysActive={!!value}
             onClick={() => {
-              this.updateValue(true);
+              this.updateValue(true)
             }}
           >
             Yes
@@ -40,25 +40,25 @@ class PinButton extends Component {
           <Button
             alwaysActive={!value}
             onClick={() => {
-              this.updateValue(false);
+              this.updateValue(false)
             }}
           >
             No
           </Button>
         </div>
       </div>
-    );
+    )
   }
 }
 
 PinButton.defaultProps = {
   onChange: val => {},
   value: false,
-};
+}
 
 PinButton.propTypes = {
   onChange: React.PropTypes.func,
   value: React.PropTypes.bool,
-};
+}
 
-export default PinButton;
+export default PinButton

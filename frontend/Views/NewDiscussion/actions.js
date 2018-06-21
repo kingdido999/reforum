@@ -1,4 +1,4 @@
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router'
 import {
   POSTING_DISCUSSION_START,
   POSTING_DISCUSSION_END,
@@ -9,8 +9,8 @@ import {
   UPDATE_DISCUSSION_PIN_STATUS,
   UPDATE_DISCUSSION_TAGS,
   CLEAR_SUCCESS_MESSAGE,
-} from './constants';
-import { postDiscussionApi } from './api';
+} from './constants'
+import { postDiscussionApi } from './api'
 
 /**
  * post a new discussion
@@ -21,44 +21,44 @@ import { postDiscussionApi } from './api';
  */
 export const postDiscussion = (userId, forumId, currentForum) => {
   return (dispatch, getState) => {
-    dispatch({ type: POSTING_DISCUSSION_START });
+    dispatch({ type: POSTING_DISCUSSION_START })
 
     // validate discussion inputs
     // discussion values are in redux state
-    const { title, content, tags, pinned } = getState().newDiscussion;
+    const { title, content, tags, pinned } = getState().newDiscussion
 
-    let validated = true;
+    let validated = true
 
     if (!userId || !forumId) {
-      validated = false;
+      validated = false
       return dispatch({
         type: POSTING_DISCUSSION_FAILURE,
         payload: 'Something is wrong with user/forum.',
-      });
+      })
     }
 
     if (title === null || title.length < 15) {
-      validated = false;
+      validated = false
       return dispatch({
         type: POSTING_DISCUSSION_FAILURE,
         payload: 'Title should be at least 15 characters.',
-      });
+      })
     }
 
     if (content === null || content.length === 0) {
-      validated = false;
+      validated = false
       return dispatch({
         type: POSTING_DISCUSSION_FAILURE,
         payload: 'Please write some content before posting.',
-      });
+      })
     }
 
     if (tags === null || tags.length === 0) {
-      validated = false;
+      validated = false
       return dispatch({
         type: POSTING_DISCUSSION_FAILURE,
         payload: 'Please provide some tags.',
-      });
+      })
     }
 
     // make api call if post is validated
@@ -73,33 +73,33 @@ export const postDiscussion = (userId, forumId, currentForum) => {
       }).then(
         data => {
           if (data.data.postCreated === true) {
-            dispatch({ type: POSTING_DISCUSSION_SUCCESS });
+            dispatch({ type: POSTING_DISCUSSION_SUCCESS })
             setTimeout(() => {
-              dispatch({ type: CLEAR_SUCCESS_MESSAGE });
-            }, 2000);
+              dispatch({ type: CLEAR_SUCCESS_MESSAGE })
+            }, 2000)
 
             // issue a redirect to the newly reacted discussion
             browserHistory.push(
               `/${currentForum}/discussion/${data.data.discussion_slug}`
-            );
+            )
           } else {
             dispatch({
               type: POSTING_DISCUSSION_FAILURE,
               payload:
                 'Something is wrong at our server end. Please try again later',
-            });
+            })
           }
         },
         error => {
           dispatch({
             type: POSTING_DISCUSSION_FAILURE,
             payload: error,
-          });
+          })
         }
-      );
+      )
     }
-  };
-};
+  }
+}
 
 /**
  * update the discussion title in redux state (controlled input)
@@ -110,8 +110,8 @@ export const updateDiscussionTitle = value => {
   return {
     type: UPDATE_DISCUSSION_TITLE,
     payload: value,
-  };
-};
+  }
+}
 
 /**
  * update discussion content in redux state (controlled input)
@@ -122,8 +122,8 @@ export const updateDiscussionContent = value => {
   return {
     type: UPDATE_DISCUSSION_CONTENT,
     payload: value,
-  };
-};
+  }
+}
 
 /**
  * update discussion pinned status in redux state (controlled input)
@@ -134,8 +134,8 @@ export const updateDiscussionPinStatus = value => {
   return {
     type: UPDATE_DISCUSSION_PIN_STATUS,
     payload: value,
-  };
-};
+  }
+}
 
 /**
  * update discussion tags in redux state (controlled input)
@@ -146,5 +146,5 @@ export const updateDiscussionTags = value => {
   return {
     type: UPDATE_DISCUSSION_TAGS,
     payload: value,
-  };
-};
+  }
+}

@@ -14,6 +14,6 @@ const forums = [
     forum_slug: 'redux',
     forum_name: 'Redux',
   },
-];
+]
 
-module.exports = forums;
+module.exports = forums

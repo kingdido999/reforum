@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import styles from './styles';
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import styles from './styles'
 
 class Button extends Component {
   render () {
@@ -12,7 +12,7 @@ class Button extends Component {
       style,
       onClick,
       alwaysActive,
-    } = this.props;
+    } = this.props
 
     return (
       <button
@@ -30,7 +30,7 @@ class Button extends Component {
       >
         {this.props.children}
       </button>
-    );
+    )
   }
 }
 
@@ -42,7 +42,7 @@ Button.defaultProps = {
   className: '',
   style: {},
   onClick: () => {},
-};
+}
 
 Button.propTypes = {
   type: React.PropTypes.oneOf(['default', 'outline']),
@@ -52,6 +52,6 @@ Button.propTypes = {
   className: React.PropTypes.string,
   style: React.PropTypes.object,
   onClick: React.PropTypes.func,
-};
+}
 
-export default Button;
+export default Button

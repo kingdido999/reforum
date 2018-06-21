@@ -1,7 +1,7 @@
 /**
  * opinion model
  */
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const opinionSchema = mongoose.Schema({
   forum_id: mongoose.Schema.ObjectId,
@@ -12,6 +12,6 @@ const opinionSchema = mongoose.Schema({
   user: { type: mongoose.Schema.ObjectId, ref: 'user' },
   date: Date,
   content: Object,
-});
+})
 
-module.exports = mongoose.model('opinion', opinionSchema);
+module.exports = mongoose.model('opinion', opinionSchema)

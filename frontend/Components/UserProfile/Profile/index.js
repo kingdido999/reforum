@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import styles from './styles.css';
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import styles from './styles.css'
 
 class Profile extends Component {
   render () {
-    const { name, gitHandler, location, avatarUrl } = this.props;
+    const { name, gitHandler, location, avatarUrl } = this.props
 
     return (
       <div className={styles.container}>
@@ -24,7 +24,7 @@ class Profile extends Component {
           <div className={styles.location}>{location}</div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -33,13 +33,13 @@ Profile.defaultProps = {
   gitHandler: 'helloWorld',
   location: 'Somewhere in the world',
   avatarUrl: 'https://google.com',
-};
+}
 
 Profile.propTypes = {
   name: React.PropTypes.string,
   gitHandler: React.PropTypes.string,
   location: React.PropTypes.string,
   avatarUrl: React.PropTypes.string,
-};
+}
 
-export default Profile;
+export default Profile

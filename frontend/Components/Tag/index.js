@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import styles from './styles';
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import styles from './styles'
 
-import Button from 'Components/Button';
+import Button from 'Components/Button'
 
 class Tag extends Component {
   render () {
-    const { name, withRemove, removeAction } = this.props;
+    const { name, withRemove, removeAction } = this.props
 
     return (
       <div
@@ -19,7 +19,7 @@ class Tag extends Component {
           </Button>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -27,12 +27,12 @@ Tag.defaultProps = {
   name: '',
   withRemove: false,
   removeAction: () => {},
-};
+}
 
 Tag.propTypes = {
   name: React.PropTypes.string.isRequired,
   withRemove: React.PropTypes.bool,
   removeAction: React.PropTypes.func,
-};
+}
 
-export default Tag;
+export default Tag

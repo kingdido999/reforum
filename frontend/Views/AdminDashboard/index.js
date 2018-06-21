@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
-import appLayout from 'SharedStyles/appLayout.css';
-import styles from './styles.css';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import classnames from 'classnames'
+import appLayout from 'SharedStyles/appLayout.css'
+import styles from './styles.css'
 
 import {
   getAdminDashboardInfo,
   getForums,
   createForum,
   deleteForum,
-} from './actions';
-import Counts from 'Components/Dashboard/Counts';
-import ForumBox from 'Components/Dashboard/ForumBox';
+} from './actions'
+import Counts from 'Components/Dashboard/Counts'
+import ForumBox from 'Components/Dashboard/ForumBox'
 
 class Dashboard extends Component {
   componentDidMount () {
     // get information needed for dashboard
-    this.props.getAdminDashboardInfo();
+    this.props.getAdminDashboardInfo()
   }
 
   render () {
@@ -27,7 +27,7 @@ class Dashboard extends Component {
       forumCount,
       userCount,
       forums,
-    } = this.props.adminInfo.info;
+    } = this.props.adminInfo.info
 
     const {
       loadingInfo,
@@ -35,11 +35,11 @@ class Dashboard extends Component {
       creatingForumError,
       deletingForum,
       deletingForumError,
-    } = this.props;
+    } = this.props
 
     const forumsArray = forums.map(forum => {
-      return { id: forum._id, name: forum.forum_name, slug: forum.forum_slug };
-    });
+      return { id: forum._id, name: forum.forum_name, slug: forum.forum_slug }
+    })
 
     return (
       <div className={classnames(appLayout.constraintWidth, styles.container)}>
@@ -60,11 +60,11 @@ class Dashboard extends Component {
           forums={forumsArray}
           deletingForum={deletingForum}
           deleteAction={forumId => {
-            this.props.deleteForum(forumId);
+            this.props.deleteForum(forumId)
           }}
           creatingForum={creatingForum}
           createAction={forumObj => {
-            this.props.createForum(forumObj);
+            this.props.createForum(forumObj)
           }}
         />
 
@@ -75,7 +75,7 @@ class Dashboard extends Component {
           <div className={styles.errorMsg}>{deletingForumError}</div>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -88,22 +88,22 @@ export default connect(
       creatingForumError: state.adminInfo.creatingForumError,
       deletingForum: state.adminInfo.deletingForum,
       deletingForumError: state.adminInfo.deletingForumError,
-    };
+    }
   },
   dispatch => {
     return {
       getAdminDashboardInfo: () => {
-        dispatch(getAdminDashboardInfo());
+        dispatch(getAdminDashboardInfo())
       },
       getForums: () => {
-        dispatch(getForums());
+        dispatch(getForums())
       },
       deleteForum: forumId => {
-        dispatch(deleteForum(forumId));
+        dispatch(deleteForum(forumId))
       },
       createForum: forumObj => {
-        dispatch(createForum(forumObj));
+        dispatch(createForum(forumObj))
       },
-    };
+    }
   }
-)(Dashboard);
+)(Dashboard)

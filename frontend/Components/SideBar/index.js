@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import styles from './styles';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import styles from './styles'
 
-import Button from 'Components/Button';
+import Button from 'Components/Button'
 
 class SideBar extends Component {
   render () {
-    const { currentForum } = this.props;
+    const { currentForum } = this.props
 
     return (
       <div className={styles.sidebarContainer}>
@@ -16,16 +16,16 @@ class SideBar extends Component {
           </Button>
         </Link>
       </div>
-    );
+    )
   }
 }
 
 SideBar.defaultProps = {
   currentForum: 'general',
-};
+}
 
 SideBar.propTypes = {
   currentForum: React.PropTypes.string,
-};
+}
 
-export default SideBar;
+export default SideBar

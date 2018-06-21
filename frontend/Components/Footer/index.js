@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
+import React, { Component } from 'react'
+import classnames from 'classnames'
 
-import styles from './styles';
-import appLayout from 'SharedStyles/appLayout.css';
+import styles from './styles'
+import appLayout from 'SharedStyles/appLayout.css'
 
 class Footer extends Component {
   render () {
@@ -12,12 +12,12 @@ class Footer extends Component {
       >
         {/* Copyright? Who cares? :-) */}
       </div>
-    );
+    )
   }
 }
 
-Footer.defaultProps = {};
+Footer.defaultProps = {}
 
-Footer.propTypes = {};
+Footer.propTypes = {}
 
-export default Footer;
+export default Footer
