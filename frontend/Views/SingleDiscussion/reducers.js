@@ -3,22 +3,17 @@ import {
   FETCHING_SINGLE_DISC_END,
   FETCHING_SINGLE_DISC_SUCCESS,
   FETCHING_SINGLE_DISC_FAILURE,
-
   TOGGLE_FAVORITE_START,
   TOGGLE_FAVORITE_SUCCESS,
   TOGGLE_FAVORITE_FAILURE,
-
   UPDATE_OPINION_CONTENT,
-
   POSTING_OPINION_START,
   POSTING_OPINION_SUCCESS,
   POSTING_OPINION_FAILURE,
-
   DELETE_DISC_START,
   DELETE_DISC_SUCCESS,
   DELETE_DISC_FAILURE,
   DELETE_DISC_REDIRECT,
-
   DELETE_OPINION_START,
   DELETE_OPINION_SUCCESS,
   DELETE_OPINION_FAILURE,
@@ -38,7 +33,7 @@ const initialState = {
 };
 
 export const singleDiscussionReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCHING_SINGLE_DISC_START:
       return Object.assign({}, state, {
         fetchingDiscussion: true,

@@ -7,13 +7,17 @@ const deleteDiscussion = require('./controller').deleteDiscussion;
 /**
  * discussion apis
  */
-const discussionAPI = (app) => {
+const discussionAPI = app => {
   // get signle discussion
   app.get('/api/discussion/:discussion_slug', (req, res) => {
     const { discussion_slug } = req.params;
     getDiscussion(discussion_slug).then(
-      (result) => { res.send(result); },
-      (error) => { res.send(error); }
+      result => {
+        res.send(result);
+      },
+      error => {
+        res.send(error);
+      }
     );
   });
 
@@ -23,13 +27,19 @@ const discussionAPI = (app) => {
     if (req.user) {
       // TODO: describe the toggle process with comments
       toggleFavorite(discussion_id, req.user._id).then(
-        (result) => {
+        result => {
           getDiscussion(result.discussion_slug).then(
-            (result) => { res.send(result); },
-            (error) => { res.send({ discussionUpdated: false }); }
+            result => {
+              res.send(result);
+            },
+            error => {
+              res.send({ discussionUpdated: false });
+            }
           );
         },
-        (error) => { res.send({ discussionUpdated: false }); }
+        error => {
+          res.send({ discussionUpdated: false });
+        }
       );
     } else {
       res.send({ discussionUpdated: false });
@@ -40,8 +50,12 @@ const discussionAPI = (app) => {
   app.post('/api/discussion/newDiscussion', (req, res) => {
     if (req.user) {
       createDiscussion(req.body).then(
-        (result) => { res.send(Object.assign({}, result._doc, { postCreated: true })); },
-        (error) => { res.send({ postCreated: false }); }
+        result => {
+          res.send(Object.assign({}, result._doc, { postCreated: true }));
+        },
+        error => {
+          res.send({ postCreated: false });
+        }
       );
     } else {
       res.send({ postCreated: false });
@@ -49,16 +63,23 @@ const discussionAPI = (app) => {
   });
 
   // delete a discussion
-  app.delete('/api/discussion/deleteDiscussion/:discussion_slug', (req, res) => {
-    if (req.user) {
-      deleteDiscussion(req.params.discussion_slug).then(
-        (result) => { res.send({ deleted: true }); },
-        (error) => { res.send({ deleted: false }); }
-      );
-    } else {
-      res.send({ deleted: false });
+  app.delete(
+    '/api/discussion/deleteDiscussion/:discussion_slug',
+    (req, res) => {
+      if (req.user) {
+        deleteDiscussion(req.params.discussion_slug).then(
+          result => {
+            res.send({ deleted: true });
+          },
+          error => {
+            res.send({ deleted: false });
+          }
+        );
+      } else {
+        res.send({ deleted: false });
+      }
     }
-  });
+  );
 };
 
 module.exports = discussionAPI;

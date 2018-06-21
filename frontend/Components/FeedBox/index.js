@@ -6,23 +6,26 @@ import styles from './styles';
 import DiscussionBox from './DiscussionBox';
 
 class FeedBox extends Component {
-  renderSort() {
-    const {
-      activeSortingMethod,
-      onChangeSortingMethod,
-    } = this.props;
+  renderSort () {
+    const { activeSortingMethod, onChangeSortingMethod } = this.props;
 
     if (this.props.type === 'general') {
       return (
         <div className={styles.sortList}>
           <span
-            className={classnames(styles.sort, (activeSortingMethod === 'date') && styles.sortActive)}
+            className={classnames(
+              styles.sort,
+              activeSortingMethod === 'date' && styles.sortActive
+            )}
             onClick={() => onChangeSortingMethod('date')}
           >
             Latest
           </span>
           <span
-            className={classnames(styles.sort, (activeSortingMethod === 'popularity') && styles.sortActive)}
+            className={classnames(
+              styles.sort,
+              activeSortingMethod === 'popularity' && styles.sortActive
+            )}
             onClick={() => onChangeSortingMethod('popularity')}
           >
             Popular
@@ -33,7 +36,7 @@ class FeedBox extends Component {
     return null;
   }
 
-  renderEmptyDiscussionLine(loading, discussions) {
+  renderEmptyDiscussionLine (loading, discussions) {
     if (!loading) {
       if (!discussions || discussions.length === 0) {
         return <div className={styles.loading}>No discussions...</div>;
@@ -41,7 +44,7 @@ class FeedBox extends Component {
     }
   }
 
-  render() {
+  render () {
     const {
       type,
       loading,
@@ -58,28 +61,31 @@ class FeedBox extends Component {
       <div className={styles.container}>
         <div className={styles.header}>
           <span className={styles.title}>{discussionBoxTitle}</span>
-          { !userProfile && this.renderSort() }
+          {!userProfile && this.renderSort()}
         </div>
-        { loading && <div className={styles.loading}>Loading...</div> }
-        { this.renderEmptyDiscussionLine(loading, discussions) }
-        { !loading &&
+        {loading && <div className={styles.loading}>Loading...</div>}
+        {this.renderEmptyDiscussionLine(loading, discussions)}
+        {!loading && (
           <div className={styles.discussions}>
-            { discussions && discussions.map((discussion) =>
-              <DiscussionBox
-                userProfile={userProfile}
-                key={discussion._id}
-                userName={discussion.user.name || discussion.user.username}
-                userGitHandler={discussion.user.username}
-                discussionTitle={discussion.title}
-                time={discussion.date}
-                tags={discussion.tags}
-                opinionCount={discussion.opinion_count}
-                voteCount={discussion.favorites.length}
-                link={`/${userProfile ? discussion.forum.forum_slug : currentForum}/discussion/${discussion.discussion_slug}`}
-              />
-            ) }
+            {discussions &&
+              discussions.map(discussion => (
+                <DiscussionBox
+                  userProfile={userProfile}
+                  key={discussion._id}
+                  userName={discussion.user.name || discussion.user.username}
+                  userGitHandler={discussion.user.username}
+                  discussionTitle={discussion.title}
+                  time={discussion.date}
+                  tags={discussion.tags}
+                  opinionCount={discussion.opinion_count}
+                  voteCount={discussion.favorites.length}
+                  link={`/${
+                    userProfile ? discussion.forum.forum_slug : currentForum
+                  }/discussion/${discussion.discussion_slug}`}
+                />
+              ))}
           </div>
-        }
+        )}
       </div>
     );
   }
@@ -91,7 +97,7 @@ FeedBox.defaultProps = {
   discussions: [],
   currentForum: 'general',
   activeSortingMethod: 'date',
-  onChangeSortingMethod: (val) => { },
+  onChangeSortingMethod: val => {},
   userProfile: false,
 };
 

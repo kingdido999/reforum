@@ -2,11 +2,9 @@ import {
   GET_ALL_INFO_START,
   GET_ALL_INFO_SUCCESS,
   GET_ALL_INFO_FAILURE,
-
   CREATE_FORUM,
   CREATE_FORUM_SUCCESS,
   CREATE_FORUM_FAILURE,
-
   DELETE_FORUM,
   DELETE_FORUM_SUCCESS,
   DELETE_FORUM_FAILURE,
@@ -38,7 +36,7 @@ export const getAdminDashboardInfo = () => {
  * @param  {Object} forumObj
  * @return {action}
  */
-export const createForum = (forumObj) => {
+export const createForum = forumObj => {
   return (dispatch, getState) => {
     dispatch({ type: CREATE_FORUM });
 
@@ -52,10 +50,12 @@ export const createForum = (forumObj) => {
             dispatch({ type: GET_ALL_INFO_SUCCESS, payload: data.data });
 
             // check if the forum was created
-            if (forumData.data.created) { dispatch({ type: CREATE_FORUM_SUCCESS }); }
-            else dispatch({ type: CREATE_FORUM_FAILURE });
+            if (forumData.data.created) {
+              dispatch({ type: CREATE_FORUM_SUCCESS });
+            } else dispatch({ type: CREATE_FORUM_FAILURE });
           },
-          error => dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
+          error =>
+            dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
         );
       },
       error => dispatch({ type: CREATE_FORUM_FAILURE })
@@ -63,7 +63,7 @@ export const createForum = (forumObj) => {
   };
 };
 
-export const deleteForum = (forumId) => {
+export const deleteForum = forumId => {
   return (dispatch, getState) => {
     dispatch({ type: DELETE_FORUM });
 
@@ -77,10 +77,12 @@ export const deleteForum = (forumId) => {
             dispatch({ type: GET_ALL_INFO_SUCCESS, payload: data.data });
 
             // check if th eforum was deleted
-            if (forumData.data.deleted) { dispatch({ type: DELETE_FORUM_SUCCESS }); }
-            else dispatch({ type: DELETE_FORUM_FAILURE });
+            if (forumData.data.deleted) {
+              dispatch({ type: DELETE_FORUM_SUCCESS });
+            } else dispatch({ type: DELETE_FORUM_FAILURE });
           },
-          error => dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
+          error =>
+            dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
         );
       },
       error => dispatch({ type: DELETE_FORUM_FAILURE })

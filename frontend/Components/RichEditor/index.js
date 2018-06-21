@@ -15,7 +15,7 @@ import BlockStyleControls from './BlockStyleControls';
 import InlineStyleControls from './InlineStyleControls';
 
 class RichEditor extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       editorState: EditorState.createEmpty(),
@@ -29,7 +29,7 @@ class RichEditor extends Component {
     this.toggleInlineStyle = this.toggleInlineStyle.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const { value } = this.props;
     if (value) {
       const contentState = convertFromRaw(JSON.parse(value));
@@ -38,7 +38,7 @@ class RichEditor extends Component {
     }
   }
 
-  onEditorStateChange(editorState) {
+  onEditorStateChange (editorState) {
     const { onChange } = this.props;
     this.setState({ editorState });
 
@@ -46,8 +46,11 @@ class RichEditor extends Component {
     onChange(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
   }
 
-  handleKeyCommand(command) {
-    const newState = RichUtils.handleKeyCommand(this.state.editorState, command);
+  handleKeyCommand (command) {
+    const newState = RichUtils.handleKeyCommand(
+      this.state.editorState,
+      command
+    );
     if (newState) {
       this.onEditorStateChange(newState);
       return true;
@@ -55,30 +58,26 @@ class RichEditor extends Component {
     return false;
   }
 
-  onTab(event) {
+  onTab (event) {
     const maxDepth = 4;
-    this.onEditorStateChange(RichUtils.onTab(event, this.state.editorState, maxDepth));
-  }
-
-  toggleBlockType(blockType) {
     this.onEditorStateChange(
-      RichUtils.toggleBlockType(
-        this.state.editorState,
-        blockType
-      )
+      RichUtils.onTab(event, this.state.editorState, maxDepth)
     );
   }
 
-  toggleInlineStyle(inlineStyle) {
+  toggleBlockType (blockType) {
     this.onEditorStateChange(
-      RichUtils.toggleInlineStyle(
-        this.state.editorState,
-        inlineStyle
-      )
+      RichUtils.toggleBlockType(this.state.editorState, blockType)
     );
   }
 
-  customBlockStyles(contentBlock) {
+  toggleInlineStyle (inlineStyle) {
+    this.onEditorStateChange(
+      RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
+    );
+  }
+
+  customBlockStyles (contentBlock) {
     const type = contentBlock.getType();
     if (type === 'blockquote') return styles.editorBlockquoteStyle;
     if (type === 'code-block') return styles.editorCodeStyle;
@@ -87,16 +86,12 @@ class RichEditor extends Component {
     if (type === 'header-three') return styles.editorH3Style;
   }
 
-  render() {
-    const {
-      type,
-      onSave,
-      readOnly,
-    } = this.props;
+  render () {
+    const { type, onSave, readOnly } = this.props;
 
     // styling for inline styles
     const inlineStyleMap = {
-      'CODE': {
+      CODE: {
         color: '#e74c3c',
         backgroundColor: '#f9f9f9',
         border: '1px solid #e8e8e8',
@@ -115,19 +110,26 @@ class RichEditor extends Component {
     if (type === 'newDiscussion') placeholder = 'Discussion summary...';
 
     return (
-      <div className={classnames(styles.container, readOnly && styles.readOnlyContainer)}>
-        { !readOnly && <div className={styles.controlsContainer}>
-          <InlineStyleControls
-            type={type}
-            editorState={this.state.editorState}
-            onToggle={this.toggleInlineStyle}
-          />
-          <BlockStyleControls
-            type={type}
-            editorState={this.state.editorState}
-            onToggle={this.toggleBlockType}
-          />
-        </div> }
+      <div
+        className={classnames(
+          styles.container,
+          readOnly && styles.readOnlyContainer
+        )}
+      >
+        {!readOnly && (
+          <div className={styles.controlsContainer}>
+            <InlineStyleControls
+              type={type}
+              editorState={this.state.editorState}
+              onToggle={this.toggleInlineStyle}
+            />
+            <BlockStyleControls
+              type={type}
+              editorState={this.state.editorState}
+              onToggle={this.toggleBlockType}
+            />
+          </div>
+        )}
 
         <div
           className={classnames(
@@ -150,9 +152,11 @@ class RichEditor extends Component {
           />
         </div>
 
-        { !readOnly && <Button noUppercase style={{ alignSelf: 'center' }} onClick={onSave}>
-          {saveButtonLabel}
-        </Button> }
+        {!readOnly && (
+          <Button noUppercase style={{ alignSelf: 'center' }} onClick={onSave}>
+            {saveButtonLabel}
+          </Button>
+        )}
       </div>
     );
   }
@@ -162,8 +166,8 @@ RichEditor.defaultProps = {
   readOnly: false,
   value: null,
   type: 'newDiscussion',
-  onChange: () => { },
-  onSave: () => { },
+  onChange: () => {},
+  onSave: () => {},
 };
 
 RichEditor.propTypes = {

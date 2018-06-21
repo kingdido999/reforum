@@ -5,15 +5,13 @@ import _ from 'lodash';
 import styles from './styles';
 
 class NavigationBar extends Component {
-  render() {
-    const {
-      navigationLinks,
-    } = this.props;
+  render () {
+    const { navigationLinks } = this.props;
 
     if (navigationLinks) {
       return (
         <ul className={styles.navigationBar}>
-          { navigationLinks.map(link => {
+          {navigationLinks.map(link => {
             if (link.id === 0) {
               return (
                 <li key={_.uniqueId('navLink_')}>
@@ -39,7 +37,7 @@ class NavigationBar extends Component {
                 </Link>
               </li>
             );
-          }) }
+          })}
         </ul>
       );
     }

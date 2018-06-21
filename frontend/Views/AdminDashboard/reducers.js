@@ -2,11 +2,9 @@ import {
   GET_ALL_INFO_START,
   GET_ALL_INFO_SUCCESS,
   GET_ALL_INFO_FAILURE,
-
   CREATE_FORUM,
   CREATE_FORUM_SUCCESS,
   CREATE_FORUM_FAILURE,
-
   DELETE_FORUM,
   DELETE_FORUM_SUCCESS,
   DELETE_FORUM_FAILURE,
@@ -66,7 +64,8 @@ export const adminInfoReducer = (state = initialState, action) => {
     case CREATE_FORUM_FAILURE:
       return Object.assign({}, state, {
         creatingForum: false,
-        creatingForumError: 'Something went wrong while trying to create the forum. Please try again. Also check out if the forum already exists.',
+        creatingForumError:
+          'Something went wrong while trying to create the forum. Please try again. Also check out if the forum already exists.',
       });
 
     case DELETE_FORUM:
@@ -84,7 +83,8 @@ export const adminInfoReducer = (state = initialState, action) => {
     case DELETE_FORUM_FAILURE:
       return Object.assign({}, state, {
         deletingForum: false,
-        deletingForumError: 'Something went wrong while trying to delete the forum. Please try again later.',
+        deletingForumError:
+          'Something went wrong while trying to delete the forum. Please try again later.',
       });
 
     default:

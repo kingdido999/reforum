@@ -6,17 +6,18 @@ const Opinion = require('./model');
  * @param  {ObjectId} discussion_id
  * @return {Promise}
  */
-const getAllOpinions = (discussion_id) => {
+const getAllOpinions = discussion_id => {
   return new Promise((resolve, reject) => {
-    Opinion
-    .find({ discussion_id })
-    .populate('user')
-    .sort({ date: -1 })
-    .exec((error, opinions) => {
-      if (error) { console.log(error); reject(error); }
-      else if (!opinions) reject(null);
-      else resolve(opinions);
-    });
+    Opinion.find({ discussion_id })
+      .populate('user')
+      .sort({ date: -1 })
+      .exec((error, opinions) => {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else if (!opinions) reject(null);
+        else resolve(opinions);
+      });
   });
 };
 
@@ -40,14 +41,18 @@ const createOpinion = ({ forum_id, discussion_id, user_id, content }) => {
       date: new Date(),
     });
 
-    newOpinion.save((error) => {
-      if (error) { console.log(error); reject(error); }
-      else { resolve(newOpinion); }
+    newOpinion.save(error => {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        resolve(newOpinion);
+      }
     });
   });
 };
 
-const updateOpinion = (opinion_id) => {
+const updateOpinion = opinion_id => {
   // TODO: implement update for opinion
 };
 
@@ -56,13 +61,13 @@ const updateOpinion = (opinion_id) => {
  * @param  {ObjectId} opinion_id
  * @return {Promise}
  */
-const deleteOpinion = (opinion_id) => {
+const deleteOpinion = opinion_id => {
   return new Promise((resolve, reject) => {
-    Opinion
-    .remove({ _id: opinion_id })
-    .exec((error) => {
-      if (error) { console.log(error); reject(error); }
-      else resolve('deleted');
+    Opinion.remove({ _id: opinion_id }).exec(error => {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else resolve('deleted');
     });
   });
 };

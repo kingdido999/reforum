@@ -10,7 +10,7 @@ const deepPropSearch = (obj, callback) => {
   const newObj = Object.assign({}, obj);
 
   // recursive search function
-  const deepSearch = (obj) => {
+  const deepSearch = obj => {
     for (const prop in obj) {
       // perform callback for each property
       callback && callback(prop, obj);
@@ -18,7 +18,7 @@ const deepPropSearch = (obj, callback) => {
       // recursive search inside objects/arrays
       if (typeof obj[prop] === 'object') {
         if (obj[prop].length && obj[prop].length > 0) {
-          obj[prop].forEach((deepObj) => {
+          obj[prop].forEach(deepObj => {
             deepSearch(deepObj);
           });
         } else {
@@ -35,9 +35,11 @@ const deepPropSearch = (obj, callback) => {
   return newObj;
 };
 
-const generateDiscussionSlug = (discussionTitle) => {
+const generateDiscussionSlug = discussionTitle => {
   const ObjectId = require('mongoose').Types.ObjectId();
-  return discussionTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_' + ObjectId;
+  return (
+    discussionTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_' + ObjectId
+  );
 };
 
 module.exports = {

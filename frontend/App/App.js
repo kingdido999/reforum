@@ -10,13 +10,8 @@ import styles from './styles.css';
 import { getForums, updateCurrentForum, getUser } from './actions';
 
 class AppContainer extends Component {
-  componentDidMount() {
-    const {
-      params,
-      updateCurrentForum,
-      getForums,
-      getUser,
-    } = this.props;
+  componentDidMount () {
+    const { params, updateCurrentForum, getForums, getUser } = this.props;
 
     // get all forum list
     getForums();
@@ -29,13 +24,8 @@ class AppContainer extends Component {
     updateCurrentForum(currentForum);
   }
 
-  componentDidUpdate() {
-    const {
-      forums,
-      params,
-      currentForum,
-      updateCurrentForum,
-    } = this.props;
+  componentDidUpdate () {
+    const { forums, params, currentForum, updateCurrentForum } = this.props;
 
     let newCurrentForum = '';
     if (params.forum) newCurrentForum = params.forum;
@@ -45,17 +35,25 @@ class AppContainer extends Component {
     if (newCurrentForum !== currentForum) updateCurrentForum(newCurrentForum);
   }
 
-  render() {
+  render () {
     const { forums } = this.props;
 
     // render only if we get the forum lists
     if (forums) {
       return (
         <div>
-          <Helmet><title>ReForum</title></Helmet>
+          <Helmet>
+            <title>ReForum</title>
+          </Helmet>
 
           <div className={styles.gitForkTag}>
-            <a className={styles.gitLink} href="https://github.com/shoumma/ReForum" target="_blank">Fork on Github</a>
+            <a
+              className={styles.gitLink}
+              href='https://github.com/shoumma/ReForum'
+              target='_blank'
+            >
+              Fork on Github
+            </a>
           </div>
 
           <Header />
@@ -65,20 +63,28 @@ class AppContainer extends Component {
       );
     }
 
-    return (
-      <div className={styles.loadingWrapper}>Loading...</div>
-    );
+    return <div className={styles.loadingWrapper}>Loading...</div>;
   }
 }
 
 export default connect(
-  (state) => { return {
-    forums: state.app.forums,
-    currentForum: state.app.currentForum,
-  }; },
-  (dispatch) => { return {
-    getForums: () => { dispatch(getForums()); },
-    updateCurrentForum: (currentForum) => { dispatch(updateCurrentForum(currentForum)); },
-    getUser: () => { dispatch(getUser()); },
-  }; }
+  state => {
+    return {
+      forums: state.app.forums,
+      currentForum: state.app.currentForum,
+    };
+  },
+  dispatch => {
+    return {
+      getForums: () => {
+        dispatch(getForums());
+      },
+      updateCurrentForum: currentForum => {
+        dispatch(updateCurrentForum(currentForum));
+      },
+      getUser: () => {
+        dispatch(getUser());
+      },
+    };
+  }
 )(AppContainer);

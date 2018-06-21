@@ -5,22 +5,22 @@ import styles from './styles';
 import Button from 'Components/Button';
 
 class PinButton extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = { value: false };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     const { value } = nextProps;
     this.setState({ value });
   }
 
-  updateValue(value) {
+  updateValue (value) {
     this.props.onChange(value);
     this.setState({ value });
   }
 
-  render() {
+  render () {
     const { value } = this.state;
 
     return (
@@ -29,27 +29,30 @@ class PinButton extends Component {
 
         <div className={styles.btnContainer}>
           <Button
-            alwaysActive={value ? true : false}
-            onClick={() => { this.updateValue(true); }}
+            alwaysActive={!!value}
+            onClick={() => {
+              this.updateValue(true);
+            }}
           >
             Yes
           </Button>
 
           <Button
-            alwaysActive={!value ? true : false}
-            onClick={() => { this.updateValue(false); }}
+            alwaysActive={!value}
+            onClick={() => {
+              this.updateValue(false);
+            }}
           >
             No
           </Button>
         </div>
-
       </div>
     );
   }
 }
 
 PinButton.defaultProps = {
-  onChange: (val) => {},
+  onChange: val => {},
   value: false,
 };
 

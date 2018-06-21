@@ -13,7 +13,7 @@ const adminAPI = require('./entities/admin/api');
 /**
  * routes configurations
  */
-const routesConfig = (app) => {
+const routesConfig = app => {
   // serves static files from public directory
   const publicPath = path.resolve(__dirname, '../public');
   app.use(express.static(publicPath));

@@ -5,24 +5,19 @@ import styles from './styles';
 import Button from 'Components/Button';
 
 class Tag extends Component {
-  render() {
-    const {
-      name,
-      withRemove,
-      removeAction,
-    } = this.props;
+  render () {
+    const { name, withRemove, removeAction } = this.props;
 
     return (
-      <div className={classnames(styles.tag, withRemove && styles.tagWithRemove)}>
+      <div
+        className={classnames(styles.tag, withRemove && styles.tagWithRemove)}
+      >
         {name}
-        { withRemove &&
-          <Button
-            onClick={removeAction}
-            className={styles.removeButton}
-          >
-            <i className={'fa fa-close'}></i>
+        {withRemove && (
+          <Button onClick={removeAction} className={styles.removeButton}>
+            <i className={'fa fa-close'} />
           </Button>
-        }
+        )}
       </div>
     );
   }

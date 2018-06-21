@@ -15,12 +15,12 @@ import Counts from 'Components/Dashboard/Counts';
 import ForumBox from 'Components/Dashboard/ForumBox';
 
 class Dashboard extends Component {
-  componentDidMount() {
+  componentDidMount () {
     // get information needed for dashboard
     this.props.getAdminDashboardInfo();
   }
 
-  render() {
+  render () {
     const {
       discussionCount,
       opinionCount,
@@ -37,15 +37,17 @@ class Dashboard extends Component {
       deletingForumError,
     } = this.props;
 
-    const forumsArray = forums.map((forum) => {
+    const forumsArray = forums.map(forum => {
       return { id: forum._id, name: forum.forum_name, slug: forum.forum_slug };
     });
 
     return (
       <div className={classnames(appLayout.constraintWidth, styles.container)}>
-        { loadingInfo && <div className={classnames(styles.loadingMsg)}>
-          Loading dashboard info...
-        </div> }
+        {loadingInfo && (
+          <div className={classnames(styles.loadingMsg)}>
+            Loading dashboard info...
+          </div>
+        )}
 
         <div className={styles.countsContainer}>
           <Counts label={'Users'} count={userCount} />
@@ -57,31 +59,51 @@ class Dashboard extends Component {
         <ForumBox
           forums={forumsArray}
           deletingForum={deletingForum}
-          deleteAction={(forumId) => { this.props.deleteForum(forumId); }}
+          deleteAction={forumId => {
+            this.props.deleteForum(forumId);
+          }}
           creatingForum={creatingForum}
-          createAction={(forumObj) => { this.props.createForum(forumObj); }}
+          createAction={forumObj => {
+            this.props.createForum(forumObj);
+          }}
         />
 
-        { creatingForumError && <div className={styles.errorMsg}>{creatingForumError}</div> }
-        { deletingForumError && <div className={styles.errorMsg}>{deletingForumError}</div> }
+        {creatingForumError && (
+          <div className={styles.errorMsg}>{creatingForumError}</div>
+        )}
+        {deletingForumError && (
+          <div className={styles.errorMsg}>{deletingForumError}</div>
+        )}
       </div>
     );
   }
 }
 
 export default connect(
-  (state) => { return {
-    adminInfo: state.adminInfo,
-    loadingInfo: state.adminInfo.loadingInfo,
-    creatingForum: state.adminInfo.creatingForum,
-    creatingForumError: state.adminInfo.creatingForumError,
-    deletingForum: state.adminInfo.deletingForum,
-    deletingForumError: state.adminInfo.deletingForumError,
-  }; },
-  (dispatch) => { return {
-    getAdminDashboardInfo: () => { dispatch(getAdminDashboardInfo()); },
-    getForums: () => { dispatch(getForums()); },
-    deleteForum: (forumId) => { dispatch(deleteForum(forumId)); },
-    createForum: (forumObj) => { dispatch(createForum(forumObj)); },
-  }; }
+  state => {
+    return {
+      adminInfo: state.adminInfo,
+      loadingInfo: state.adminInfo.loadingInfo,
+      creatingForum: state.adminInfo.creatingForum,
+      creatingForumError: state.adminInfo.creatingForumError,
+      deletingForum: state.adminInfo.deletingForum,
+      deletingForumError: state.adminInfo.deletingForumError,
+    };
+  },
+  dispatch => {
+    return {
+      getAdminDashboardInfo: () => {
+        dispatch(getAdminDashboardInfo());
+      },
+      getForums: () => {
+        dispatch(getForums());
+      },
+      deleteForum: forumId => {
+        dispatch(deleteForum(forumId));
+      },
+      createForum: forumObj => {
+        dispatch(createForum(forumObj));
+      },
+    };
+  }
 )(Dashboard);

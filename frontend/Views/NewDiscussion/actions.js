@@ -4,12 +4,10 @@ import {
   POSTING_DISCUSSION_END,
   POSTING_DISCUSSION_SUCCESS,
   POSTING_DISCUSSION_FAILURE,
-
   UPDATE_DISCUSSION_TITLE,
   UPDATE_DISCUSSION_CONTENT,
   UPDATE_DISCUSSION_PIN_STATUS,
   UPDATE_DISCUSSION_TAGS,
-
   CLEAR_SUCCESS_MESSAGE,
 } from './constants';
 import { postDiscussionApi } from './api';
@@ -27,12 +25,7 @@ export const postDiscussion = (userId, forumId, currentForum) => {
 
     // validate discussion inputs
     // discussion values are in redux state
-    const {
-      title,
-      content,
-      tags,
-      pinned,
-    } = getState().newDiscussion;
+    const { title, content, tags, pinned } = getState().newDiscussion;
 
     let validated = true;
 
@@ -78,21 +71,26 @@ export const postDiscussion = (userId, forumId, currentForum) => {
         tags,
         pinned,
       }).then(
-        (data) => {
+        data => {
           if (data.data.postCreated === true) {
             dispatch({ type: POSTING_DISCUSSION_SUCCESS });
-            setTimeout(() => { dispatch({ type: CLEAR_SUCCESS_MESSAGE }); }, 2000);
+            setTimeout(() => {
+              dispatch({ type: CLEAR_SUCCESS_MESSAGE });
+            }, 2000);
 
             // issue a redirect to the newly reacted discussion
-            browserHistory.push(`/${currentForum}/discussion/${data.data.discussion_slug}`);
+            browserHistory.push(
+              `/${currentForum}/discussion/${data.data.discussion_slug}`
+            );
           } else {
             dispatch({
               type: POSTING_DISCUSSION_FAILURE,
-              payload: 'Something is wrong at our server end. Please try again later',
+              payload:
+                'Something is wrong at our server end. Please try again later',
             });
           }
         },
-        (error) => {
+        error => {
           dispatch({
             type: POSTING_DISCUSSION_FAILURE,
             payload: error,
@@ -108,7 +106,7 @@ export const postDiscussion = (userId, forumId, currentForum) => {
  * @param  {String} value
  * @return {action}
  */
-export const updateDiscussionTitle = (value) => {
+export const updateDiscussionTitle = value => {
   return {
     type: UPDATE_DISCUSSION_TITLE,
     payload: value,
@@ -120,7 +118,7 @@ export const updateDiscussionTitle = (value) => {
  * @param  {Object} value
  * @return {action}
  */
-export const updateDiscussionContent = (value) => {
+export const updateDiscussionContent = value => {
   return {
     type: UPDATE_DISCUSSION_CONTENT,
     payload: value,
@@ -132,7 +130,7 @@ export const updateDiscussionContent = (value) => {
  * @param  {Boolean} value
  * @return {action}
  */
-export const updateDiscussionPinStatus = (value) => {
+export const updateDiscussionPinStatus = value => {
   return {
     type: UPDATE_DISCUSSION_PIN_STATUS,
     payload: value,
@@ -144,7 +142,7 @@ export const updateDiscussionPinStatus = (value) => {
  * @param  {Array} value
  * @return {action}
  */
-export const updateDiscussionTags = (value) => {
+export const updateDiscussionTags = value => {
   return {
     type: UPDATE_DISCUSSION_TAGS,
     payload: value,

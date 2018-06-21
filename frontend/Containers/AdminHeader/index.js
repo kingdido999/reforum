@@ -13,19 +13,12 @@ import NavigationBar from 'Components/Header/NavigationBar';
 import PlaceholderImage from 'SharedStyles/placeholder.jpg';
 
 class AdminHeader extends Component {
-  renderNavLinks() {
-    return [
-      { name: 'Dashboard', link: '/admin' },
-    ];
+  renderNavLinks () {
+    return [{ name: 'Dashboard', link: '/admin' }];
   }
 
-  render() {
-    const {
-      authenticated,
-      name,
-      username,
-      avatarUrl,
-    } = this.props.user;
+  render () {
+    const { authenticated, name, username, avatarUrl } = this.props.user;
 
     return (
       <div className={classnames(appLayout.constraintWidth)}>
@@ -39,17 +32,15 @@ class AdminHeader extends Component {
             avatar={avatarUrl}
           />
         </div>
-        <NavigationBar
-          navigationLinks={this.renderNavLinks()}
-        />
+        <NavigationBar navigationLinks={this.renderNavLinks()} />
       </div>
     );
   }
 }
 
-export default connect(
-  (state) => { return {
+export default connect(state => {
+  return {
     user: state.user,
     forums: state.app.forums,
-  }; }
-)(AdminHeader);
+  };
+})(AdminHeader);

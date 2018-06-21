@@ -12,11 +12,11 @@ import NavigationBar from 'Components/Header/NavigationBar';
 import PlaceholderImage from 'SharedStyles/placeholder.jpg';
 
 class Header extends Component {
-  renderNavLinks() {
+  renderNavLinks () {
     const { forums } = this.props;
 
     if (forums) {
-      return forums.map((forum) => {
+      return forums.map(forum => {
         return {
           id: forum._id,
           name: forum.forum_name,
@@ -28,13 +28,8 @@ class Header extends Component {
     return null;
   }
 
-  render() {
-    const {
-      authenticated,
-      name,
-      username,
-      avatarUrl,
-    } = this.props.user;
+  render () {
+    const { authenticated, name, username, avatarUrl } = this.props.user;
 
     return (
       <div className={classnames(appLayout.constraintWidth)}>
@@ -47,17 +42,15 @@ class Header extends Component {
             avatar={avatarUrl}
           />
         </div>
-        <NavigationBar
-          navigationLinks={this.renderNavLinks()}
-        />
+        <NavigationBar navigationLinks={this.renderNavLinks()} />
       </div>
     );
   }
 }
 
-export default connect(
-  (state) => { return {
+export default connect(state => {
+  return {
     user: state.user,
     forums: state.app.forums,
-  }; }
-)(Header);
+  };
+})(Header);

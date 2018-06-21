@@ -11,7 +11,7 @@ import Tag from 'Components/Tag';
 import RichEditor from 'Components/RichEditor';
 
 class Discussion extends Component {
-  render() {
+  render () {
     const {
       id,
       userAvatar,
@@ -42,14 +42,19 @@ class Discussion extends Component {
 
     return (
       <div className={styles.container}>
-
         <div className={styles.infoContainer}>
           <img className={styles.avatar} src={userAvatar} />
           <div className={styles.columnOnSmallBP}>
             <div className={styles.userInfo}>
-              <Link to={`/user/${userGitHandler}`} className={styles.name}>{userName || userGitHandler}</Link>
-              <a href={`https://www.github.com/${userGitHandler}`} target="_blank" className={styles.gitHandler}>
-                <i className={classnames('fa fa-github-alt', styles.gitIcon)}></i>
+              <Link to={`/user/${userGitHandler}`} className={styles.name}>
+                {userName || userGitHandler}
+              </Link>
+              <a
+                href={`https://www.github.com/${userGitHandler}`}
+                target='_blank'
+                className={styles.gitHandler}
+              >
+                <i className={classnames('fa fa-github-alt', styles.gitIcon)} />
                 <span>{userGitHandler}</span>
               </a>
             </div>
@@ -59,30 +64,47 @@ class Discussion extends Component {
 
         <div className={styles.discTitle}>{discTitle}</div>
         <div className={styles.discContent}>
-          <RichEditor
-            readOnly={true}
-            value={discContent}
-          />
+          <RichEditor readOnly={true} value={discContent} />
         </div>
 
         <div className={styles.discFooter}>
           <div className={styles.tags}>
-            { tags.map(tag => <Tag name={tag} key={_.uniqueId('tag_')} />)}
+            {tags.map(tag => <Tag name={tag} key={_.uniqueId('tag_')} />)}
           </div>
-          <Button noUppercase className={styles.favoriteButton} onClick={() => { !toggleingFavorite && favoriteAction(id); }}>
-            <i className={classnames(`fa fa-${userFavorited ? 'heart' : 'heart-o'}`)}></i>
+          <Button
+            noUppercase
+            className={styles.favoriteButton}
+            onClick={() => {
+              !toggleingFavorite && favoriteAction(id);
+            }}
+          >
+            <i
+              className={classnames(
+                `fa fa-${userFavorited ? 'heart' : 'heart-o'}`
+              )}
+            />
             <span>{favCount}</span>
           </Button>
 
-          { allowDelete && <Button noUppercase className={styles.deleteButton} onClick={() => { deleteAction(); }}>
-            <i className={classnames('fa fa-trash', styles.trashIcon)}></i>
-            <span>Delete</span>
-          </Button> }
+          {allowDelete && (
+            <Button
+              noUppercase
+              className={styles.deleteButton}
+              onClick={() => {
+                deleteAction();
+              }}
+            >
+              <i className={classnames('fa fa-trash', styles.trashIcon)} />
+              <span>Delete</span>
+            </Button>
+          )}
         </div>
 
-        { deletingDiscussion && <div className={styles.deletingDiscussion}>
-          Deleting Discussion...
-        </div> }
+        {deletingDiscussion && (
+          <div className={styles.deletingDiscussion}>
+            Deleting Discussion...
+          </div>
+        )}
       </div>
     );
   }
@@ -95,15 +117,16 @@ Discussion.defaultProps = {
   userGitHandler: 'github',
   discTitle: 'Default Discussion Title',
   discDate: 'a day ago',
-  discContent: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  tags: [ 'react', 'redux', 'webkit' ],
+  discContent:
+    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  tags: ['react', 'redux', 'webkit'],
   favoriteCount: 1,
-  favoriteAction: () => { },
+  favoriteAction: () => {},
   userFavorited: false,
   toggleingFavorite: false,
   allowDelete: false,
   deletingDiscussion: false,
-  deleteAction: () => { },
+  deleteAction: () => {},
 };
 
 Discussion.propTypes = {

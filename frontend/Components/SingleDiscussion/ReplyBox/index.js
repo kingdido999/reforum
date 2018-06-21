@@ -4,29 +4,25 @@ import styles from './styles.css';
 import RichEditor from 'Components/RichEditor';
 
 class ReplyBox extends Component {
-  render() {
-    const {
-      posting,
-      onSubmit,
-      onChange,
-    } = this.props;
+  render () {
+    const { posting, onSubmit, onChange } = this.props;
 
-    if (posting) return <div className={styles.loadingWrapper}>Posting your opinion...</div>;
+    if (posting) {
+      return (
+        <div className={styles.loadingWrapper}>Posting your opinion...</div>
+      );
+    }
 
     return (
-      <RichEditor
-        type="newOpinion"
-        onSave={onSubmit}
-        onChange={onChange}
-      />
+      <RichEditor type='newOpinion' onSave={onSubmit} onChange={onChange} />
     );
   }
 }
 
 ReplyBox.defaultProps = {
   posting: false,
-  onSubmit: () => { },
-  onChange: (value) => { },
+  onSubmit: () => {},
+  onChange: value => {},
 };
 
 ReplyBox.propTypes = {

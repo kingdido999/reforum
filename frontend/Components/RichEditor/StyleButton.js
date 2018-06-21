@@ -3,15 +3,15 @@ import classnames from 'classnames';
 import styles from './styles.css';
 
 class StyleButton extends React.Component {
-  constructor() {
+  constructor () {
     super();
-    this.onToggle = (e) => {
+    this.onToggle = e => {
       e.preventDefault();
       this.props.onToggle(this.props.style);
     };
   }
 
-  render() {
+  render () {
     let className = `${styles.controlButton}`;
     if (this.props.active) {
       className += ` ${styles.controlButtonActive}`;

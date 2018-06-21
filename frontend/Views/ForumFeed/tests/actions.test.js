@@ -49,9 +49,11 @@ describe('getPinnedDiscussions', () => {
     const store = mockStore({});
 
     // perform the test
-    return store.dispatch(actions.getPinnedDiscussions(forumId, true)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+    return store
+      .dispatch(actions.getPinnedDiscussions(forumId, true))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
   });
 });
 

@@ -20,7 +20,7 @@ import styles from './styles.css';
 import appLayout from 'SharedStyles/appLayout.css';
 
 class NewDiscussion extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -30,27 +30,19 @@ class NewDiscussion extends Component {
     };
   }
 
-  componentDidMount() {
-    const {
-      user,
-      currentForum,
-      forums,
-    } = this.props;
+  componentDidMount () {
+    const { user, currentForum, forums } = this.props;
 
     this.setUserAndForumID(user, forums, currentForum);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {
-      user,
-      currentForum,
-      forums,
-    } = nextProps;
+  componentWillReceiveProps (nextProps) {
+    const { user, currentForum, forums } = nextProps;
 
     this.setUserAndForumID(user, forums, currentForum);
   }
 
-  setUserAndForumID(user, forums, currentForum) {
+  setUserAndForumID (user, forums, currentForum) {
     const forumId = _.find(forums, { forum_slug: currentForum });
     if (forumId) {
       const currentForumId = forumId._id;
@@ -65,11 +57,8 @@ class NewDiscussion extends Component {
     }
   }
 
-  renderEditor() {
-    const {
-      authenticated,
-      role,
-    } = this.props.user;
+  renderEditor () {
+    const { authenticated, role } = this.props.user;
 
     const {
       updateDiscussionTitle,
@@ -80,45 +69,49 @@ class NewDiscussion extends Component {
       currentForum,
     } = this.props;
 
-    const {
-      title,
-      content,
-      tags,
-      pinned,
-    } = this.props.newDiscussion;
+    const { title, content, tags, pinned } = this.props.newDiscussion;
 
-    const {
-      forumId,
-      userId,
-    } = this.state;
+    const { forumId, userId } = this.state;
 
     // only show the editor when user is authenticated
     if (authenticated) {
       return [
         <input
           key={'title'}
-          type="text"
+          type='text'
           className={styles.titleInput}
           placeholder={'Discussion title...'}
           value={title}
-          onChange={(event) => { updateDiscussionTitle(event.target.value); }}
+          onChange={event => {
+            updateDiscussionTitle(event.target.value);
+          }}
         />,
-        (role === 'admin') && <PinButton
-          key={'pinned'}
-          value={pinned}
-          onChange={(value) => { updateDiscussionPinStatus(value); }}
-        />,
+        role === 'admin' && (
+          <PinButton
+            key={'pinned'}
+            value={pinned}
+            onChange={value => {
+              updateDiscussionPinStatus(value);
+            }}
+          />
+        ),
         <TagsInput
           key={'tags'}
           value={tags}
-          onChange={(tags) => { updateDiscussionTags(tags); }}
+          onChange={tags => {
+            updateDiscussionTags(tags);
+          }}
         />,
         <RichEditor
           key={'content'}
           type='newDiscussion'
           value={content}
-          onChange={(value) => { updateDiscussionContent(value); }}
-          onSave={() => { postDiscussion(userId, forumId, currentForum); }}
+          onChange={value => {
+            updateDiscussionContent(value);
+          }}
+          onSave={() => {
+            postDiscussion(userId, forumId, currentForum);
+          }}
         />,
       ];
     }
@@ -130,10 +123,16 @@ class NewDiscussion extends Component {
     );
   }
 
-  render() {
+  render () {
     const { fatalError } = this.state;
 
-    if (fatalError) { return (<div className={classnames(styles.errorMsg, styles.fatalError)}>{fatalError}</div>); }
+    if (fatalError) {
+      return (
+        <div className={classnames(styles.errorMsg, styles.fatalError)}>
+          {fatalError}
+        </div>
+      );
+    }
 
     const { currentForum } = this.props;
     const {
@@ -144,32 +143,55 @@ class NewDiscussion extends Component {
 
     return (
       <div className={classnames(appLayout.constraintWidth, styles.content)}>
-        <Helmet><title>ReForum | New Discussion</title></Helmet>
+        <Helmet>
+          <title>ReForum | New Discussion</title>
+        </Helmet>
 
         <div className={styles.forumInfo}>
-          You are creating a new discussion on <span className={styles.forumName}>{currentForum}</span> forum.
+          You are creating a new discussion on{' '}
+          <span className={styles.forumName}>{currentForum}</span> forum.
         </div>
         <div className={styles.errorMsg}>{errorMsg}</div>
-        { postingSuccess && <div className={styles.successMsg}>Your discussion is created :-)</div> }
-        { this.renderEditor() }
-        { postingDiscussion && <div className={styles.postingMsg}>Posting discussion...</div> }
+        {postingSuccess && (
+          <div className={styles.successMsg}>
+            Your discussion is created :-)
+          </div>
+        )}
+        {this.renderEditor()}
+        {postingDiscussion && (
+          <div className={styles.postingMsg}>Posting discussion...</div>
+        )}
       </div>
     );
   }
 }
 
 export default connect(
-  (state) => { return {
-    user: state.user,
-    forums: state.app.forums,
-    currentForum: state.app.currentForum,
-    newDiscussion: state.newDiscussion,
-  }; },
-  (dispatch) => { return {
-    postDiscussion: (userId, forumId, currentForum) => { dispatch(postDiscussion(userId, forumId, currentForum)); },
-    updateDiscussionTitle: (value) => { dispatch(updateDiscussionTitle(value)); },
-    updateDiscussionContent: (value) => { dispatch(updateDiscussionContent(value)); },
-    updateDiscussionPinStatus: (value) => { dispatch(updateDiscussionPinStatus(value)); },
-    updateDiscussionTags: (value) => { dispatch(updateDiscussionTags(value)); },
-  }; }
+  state => {
+    return {
+      user: state.user,
+      forums: state.app.forums,
+      currentForum: state.app.currentForum,
+      newDiscussion: state.newDiscussion,
+    };
+  },
+  dispatch => {
+    return {
+      postDiscussion: (userId, forumId, currentForum) => {
+        dispatch(postDiscussion(userId, forumId, currentForum));
+      },
+      updateDiscussionTitle: value => {
+        dispatch(updateDiscussionTitle(value));
+      },
+      updateDiscussionContent: value => {
+        dispatch(updateDiscussionContent(value));
+      },
+      updateDiscussionPinStatus: value => {
+        dispatch(updateDiscussionPinStatus(value));
+      },
+      updateDiscussionTags: value => {
+        dispatch(updateDiscussionTags(value));
+      },
+    };
+  }
 )(NewDiscussion);

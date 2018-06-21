@@ -17,13 +17,10 @@ const viewsPath = path.resolve(__dirname, '../frontend', 'Views');
  * webpack development configuration
  */
 module.exports = {
-  target  : 'web',
+  target: 'web',
   devtool: 'inline-source-map',
 
-  entry: [
-    'webpack-hot-middleware/client',
-    mainAppPath,
-  ],
+  entry: ['webpack-hot-middleware/client', mainAppPath],
 
   output: {
     filename: 'bundle.js',
@@ -35,7 +32,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: [ 'react-hot', 'babel-loader' ],
+        loaders: ['react-hot', 'babel-loader'],
         exclude: [nodeModulesPath],
       },
       {
@@ -47,18 +44,21 @@ module.exports = {
         ],
       },
       { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
-      { test: /\.svg$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
+      {
+        test: /\.svg$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      },
     ],
   },
 
-  postcss: [ require('autoprefixer'), require('postcss-nesting') ],
+  postcss: [require('autoprefixer'), require('postcss-nesting')],
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
   ],
 
-  resolve : {
+  resolve: {
     extensions: ['', '.js', '.css'],
     alias: {
       SharedStyles: sharedStylesPath,

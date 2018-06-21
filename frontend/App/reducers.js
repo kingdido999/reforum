@@ -24,12 +24,12 @@ export const appReducer = (state = initialState, action) => {
     case START_FETCHING_FORUMS:
       return Object.assign({}, state, {
         fetchingForums: true,
-      });;
+      });
 
     case STOP_FETCHING_FORUMS:
       return Object.assign({}, state, {
         fetchingForums: false,
-      });;
+      });
 
     case FETCHING_FORUMS_SUCCESS:
       return Object.assign({}, state, {
@@ -92,20 +92,23 @@ export const userReducer = (state = initialUserState, action) => {
         role,
       } = action.payload;
 
-      return Object.assign({}, state), {
-        fetchingUser: false,
-        authenticated: true,
-        error: null,
-        _id,
-        name,
-        username,
-        avatarUrl,
-        email,
-        githubBio,
-        githubUrl,
-        githubLocation,
-        role,
-      };
+      return (
+        Object.assign({}, state),
+        {
+          fetchingUser: false,
+          authenticated: true,
+          error: null,
+          _id,
+          name,
+          username,
+          avatarUrl,
+          email,
+          githubBio,
+          githubUrl,
+          githubLocation,
+          role,
+        }
+      );
 
     case FETCHING_USER_FAILURE:
       return Object.assign({}, initialUserState, {

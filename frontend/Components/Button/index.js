@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import styles from './styles';
 
 class Button extends Component {
-  render() {
+  render () {
     const {
       type,
       fullWidth,
@@ -41,7 +41,7 @@ Button.defaultProps = {
   alwaysActive: false,
   className: '',
   style: {},
-  onClick: () => { },
+  onClick: () => {},
 };
 
 Button.propTypes = {

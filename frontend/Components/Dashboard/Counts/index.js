@@ -3,11 +3,8 @@ import classnames from 'classnames';
 import styles from './styles';
 
 class Counts extends Component {
-  render() {
-    const {
-      count,
-      label,
-    } = this.props;
+  render () {
+    const { count, label } = this.props;
 
     return (
       <div className={styles.container}>

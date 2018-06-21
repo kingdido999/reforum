@@ -7,7 +7,7 @@ import styles from './styles';
 import Tag from 'Components/Tag';
 
 class DiscussionBox extends Component {
-  render() {
+  render () {
     const {
       voteCount,
       userName,
@@ -25,18 +25,34 @@ class DiscussionBox extends Component {
 
     return (
       <div className={styles.container}>
-        <div className={classnames(styles.title, userProfile && styles.titleBottomMargin)}><Link to={link}>{discussionTitle}</Link></div>
+        <div
+          className={classnames(
+            styles.title,
+            userProfile && styles.titleBottomMargin
+          )}
+        >
+          <Link to={link}>{discussionTitle}</Link>
+        </div>
 
-        { !userProfile && <div className={styles.posterInfo}>
-          <Link to={`/user/${userGitHandler}`} className={styles.name}>{userName}</Link>
-          <a target="_blank" href={`https://www.github.com/${userGitHandler}`} className={styles.gitHandler}>
-            - <i className={classnames('fa fa-github-alt', styles.gitIcon)}></i> {userGitHandler}
-          </a>
-        </div> }
+        {!userProfile && (
+          <div className={styles.posterInfo}>
+            <Link to={`/user/${userGitHandler}`} className={styles.name}>
+              {userName}
+            </Link>
+            <a
+              target='_blank'
+              href={`https://www.github.com/${userGitHandler}`}
+              className={styles.gitHandler}
+            >
+              - <i className={classnames('fa fa-github-alt', styles.gitIcon)} />{' '}
+              {userGitHandler}
+            </a>
+          </div>
+        )}
 
         <div className={styles.boxFooter}>
           <div className={styles.tagsArea}>
-            { tags.map((tag) => <Tag key={tag} name={tag} />) }
+            {tags.map(tag => <Tag key={tag} name={tag} />)}
           </div>
 
           <div className={styles.postInfo}>

@@ -10,18 +10,16 @@ import Profile from 'Components/UserProfile/Profile';
 import FeedBox from 'Components/FeedBox';
 
 // actions
-import {
-  fetchUserProfile,
-} from './actions';
+import { fetchUserProfile } from './actions';
 
 class UserProfile extends Component {
-  componentDidMount() {
+  componentDidMount () {
     const { fetchUserProfile } = this.props;
     const { username } = this.props.params;
     fetchUserProfile(username);
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     // fetch profile if different username
     const { username: oldUsername } = this.props.params;
     const { username: futureUsername } = newProps.params;
@@ -33,28 +31,20 @@ class UserProfile extends Component {
     }
   }
 
-  render() {
-    const {
-      fetchingProfile,
-      profile,
-      error,
-    } = this.props;
+  render () {
+    const { fetchingProfile, profile, error } = this.props;
 
     if (error) {
-      return <div className={styles.errorMsg}>{ error }</div>;
+      return <div className={styles.errorMsg}>{error}</div>;
     }
 
-    const {
-      name,
-      username,
-      avatarUrl,
-      github,
-      discussions,
-    } = profile;
+    const { name, username, avatarUrl, github, discussions } = profile;
 
     if (fetchingProfile) {
       return (
-        <div className={classnames(appLayout.constraintWidth, styles.loadingMsg)}>
+        <div
+          className={classnames(appLayout.constraintWidth, styles.loadingMsg)}
+        >
           Loading users profile ...
         </div>
       );
@@ -62,7 +52,9 @@ class UserProfile extends Component {
 
     return (
       <div className={classnames(appLayout.constraintWidth, styles.container)}>
-        <Helmet><title>{`${name || username} | ReForum`}</title></Helmet>
+        <Helmet>
+          <title>{`${name || username} | ReForum`}</title>
+        </Helmet>
 
         <div className={appLayout.primaryContent}>
           <Profile
@@ -72,11 +64,7 @@ class UserProfile extends Component {
             avatarUrl={avatarUrl}
           />
 
-          <FeedBox
-            userProfile
-            type='general'
-            discussions={discussions}
-          />
+          <FeedBox userProfile type='general' discussions={discussions} />
         </div>
       </div>
     );
@@ -84,12 +72,18 @@ class UserProfile extends Component {
 }
 
 export default connect(
-  (state) => { return {
-    fetchingProfile: state.userProfile.fetchingProfile,
-    profile: state.userProfile.profile,
-    error: state.userProfile.error,
-  }; },
-  (dispatch) => { return {
-    fetchUserProfile: (userSlug) => { dispatch(fetchUserProfile(userSlug)); },
-  }; }
+  state => {
+    return {
+      fetchingProfile: state.userProfile.fetchingProfile,
+      profile: state.userProfile.profile,
+      error: state.userProfile.error,
+    };
+  },
+  dispatch => {
+    return {
+      fetchUserProfile: userSlug => {
+        dispatch(fetchUserProfile(userSlug));
+      },
+    };
+  }
 )(UserProfile);

@@ -5,10 +5,8 @@ import styles from './styles';
 import Button from 'Components/Button';
 
 class SideBar extends Component {
-  render() {
-    const {
-      currentForum,
-    } = this.props;
+  render () {
+    const { currentForum } = this.props;
 
     return (
       <div className={styles.sidebarContainer}>
@@ -21,7 +19,6 @@ class SideBar extends Component {
     );
   }
 }
-
 
 SideBar.defaultProps = {
   currentForum: 'general',

@@ -27,7 +27,8 @@
     "test": "jest",
     "start": "better-npm-run start",
     "start:dev": "better-npm-run start:dev",
-    "build": "webpack --config config/webpack.prod.config.js"
+    "build": "webpack --config config/webpack.prod.config.js",
+    "format": "prettier-standard '**/*.js'"
   },
   "betterScripts": {
     "start": {
@@ -86,6 +87,7 @@
     "nock": "^9.0.13",
     "postcss-loader": "^1.2.2",
     "postcss-nesting": "^2.3.1",
+    "prettier-standard": "^8.0.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-helmet": "^5.0.3",

@@ -10,12 +10,12 @@ import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
 
 class AdminContainer extends Component {
-  componentDidMount() {
+  componentDidMount () {
     // fetch the user
     this.props.getUser();
   }
 
-  render() {
+  render () {
     const { user } = this.props;
 
     if (user.fetchingUser) {
@@ -29,13 +29,14 @@ class AdminContainer extends Component {
     if (user.role === 'admin') {
       return (
         <div>
-          <Helmet><title>ReForum | Admin</title></Helmet>
+          <Helmet>
+            <title>ReForum | Admin</title>
+          </Helmet>
           <AdminHeader />
           {this.props.children}
         </div>
       );
-    }
-    else {
+    } else {
       return (
         <div style={{ textAlign: 'center', marginTop: 20 }}>
           We are cordially sorry that you are not allowed to view admin panel!<br />
@@ -54,10 +55,16 @@ class AdminContainer extends Component {
 }
 
 export default connect(
-  (state) => { return {
-    user: state.user,
-  }; },
-  (dispatch) => { return {
-    getUser: () => { dispatch(getUser()); },
-  }; }
+  state => {
+    return {
+      user: state.user,
+    };
+  },
+  dispatch => {
+    return {
+      getUser: () => {
+        dispatch(getUser());
+      },
+    };
+  }
 )(AdminContainer);

@@ -1,4 +1,5 @@
-const generateDiscussionSlug = require('../../utilities/tools').generateDiscussionSlug;
+const generateDiscussionSlug = require('../../utilities/tools')
+  .generateDiscussionSlug;
 const getAllOpinions = require('../opinion/controller').getAllOpinions;
 const getUser = require('../user/controller').getUser;
 
@@ -17,25 +18,31 @@ const getDiscussion = (discussion_slug, discussion_id) => {
     if (discussion_slug) findObject.discussion_slug = discussion_slug;
     if (discussion_id) findObject._id = discussion_id;
 
-    Discussion
-    .findOne(findObject)
-    .populate('forum')
-    .populate('user')
-    .lean()
-    .exec((error, result) => {
-      if (error) { console.log(error); reject(error); }
-      else if (!result) reject(null);
-      else {
-        // add opinions to the discussion object
-        getAllOpinions(result._id).then(
-          (opinions) => {
-            result.opinions = opinions;
-            resolve(result);
-          },
-          (error) => { { console.log(error); reject(error); } }
-        );
-      }
-    });
+    Discussion.findOne(findObject)
+      .populate('forum')
+      .populate('user')
+      .lean()
+      .exec((error, result) => {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else if (!result) reject(null);
+        else {
+          // add opinions to the discussion object
+          getAllOpinions(result._id).then(
+            opinions => {
+              result.opinions = opinions;
+              resolve(result);
+            },
+            error => {
+              {
+                console.log(error);
+                reject(error);
+              }
+            }
+          );
+        }
+      });
   });
 };
 
@@ -44,7 +51,7 @@ const getDiscussion = (discussion_slug, discussion_id) => {
  * @param  {Object} discussion
  * @return {Promise}
  */
-const createDiscussion = (discussion) => {
+const createDiscussion = discussion => {
   return new Promise((resolve, reject) => {
     const newDiscussion = new Discussion({
       forum_id: discussion.forumId,
@@ -60,7 +67,7 @@ const createDiscussion = (discussion) => {
       pinned: discussion.pinned,
     });
 
-    newDiscussion.save((error) => {
+    newDiscussion.save(error => {
       if (error) {
         console.log(error);
         reject(error);
@@ -80,8 +87,10 @@ const createDiscussion = (discussion) => {
 const toggleFavorite = (discussion_id, user_id) => {
   return new Promise((resolve, reject) => {
     Discussion.findById(discussion_id, (error, discussion) => {
-      if (error) { console.log(error); reject(error); }
-      else if (!discussion) reject(null);
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else if (!discussion) reject(null);
       else {
         // add or remove favorite
         let matched = null;
@@ -96,48 +105,53 @@ const toggleFavorite = (discussion_id, user_id) => {
         } else {
           discussion.favorites = [
             ...discussion.favorites.slice(0, matched),
-            ...discussion.favorites.slice(matched + 1, discussion.favorites.length),
+            ...discussion.favorites.slice(
+              matched + 1,
+              discussion.favorites.length
+            ),
           ];
         }
 
         discussion.save((error, updatedDiscussion) => {
-          if (error) { console.log(error); reject(error); }
+          if (error) {
+            console.log(error);
+            reject(error);
+          }
           resolve(updatedDiscussion);
         });
       }
     });
   });
-
 };
 
 const updateDiscussion = (forum_id, discussion_slug) => {
   // TODO: implement update feature
 };
 
-const deleteDiscussion = (discussion_slug) => {
+const deleteDiscussion = discussion_slug => {
   return new Promise((resolve, reject) => {
     // find the discussion id first
-    Discussion
-    .findOne({ discussion_slug })
-    .exec((error, discussion) => {
-      if (error) { console.log(error); reject(error); }
+    Discussion.findOne({ discussion_slug }).exec((error, discussion) => {
+      if (error) {
+        console.log(error);
+        reject(error);
+      }
 
       // get the discussion id
       const discussion_id = discussion._id;
 
       // remove any opinion regarding the discussion
-      Opinion
-      .remove({ discussion_id })
-      .exec((error) => {
-        if (error) { console.log(error); reject(error); }
-
-        // finally remove the discussion
-        else {
-          Discussion
-          .remove({ discussion_slug })
-          .exec((error) => {
-            if (error) { console.log(error); reject(error); }
-            else {
+      Opinion.remove({ discussion_id }).exec(error => {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          // finally remove the discussion
+          Discussion.remove({ discussion_slug }).exec(error => {
+            if (error) {
+              console.log(error);
+              reject(error);
+            } else {
               resolve({ deleted: true });
             }
           });

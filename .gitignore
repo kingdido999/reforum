@@ -23,3 +23,6 @@ coverage
 
 # config
 config/credentials.js
+
+# build files
+public/build

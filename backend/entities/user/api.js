@@ -5,7 +5,7 @@ const getFullProfile = require('./controller').getFullProfile;
 /**
  * user apis
  */
-const userAPI = (app) => {
+const userAPI = app => {
   // get authenticated user
   app.get('/api/user/getUser', (req, res) => {
     if (req.user) res.send(req.user);
@@ -13,17 +13,16 @@ const userAPI = (app) => {
   });
 
   // github authentication route
-  app.get(
-    '/api/user/authViaGitHub',
-    passport.authenticate('github')
-  );
+  app.get('/api/user/authViaGitHub', passport.authenticate('github'));
 
   // callback route from github
   app.get(
     // this should match callback url of github app
     '/api/user/authViaGitHub/callback',
     passport.authenticate('github', { failureRedirect: '/signIn/failed' }),
-    (req, res) => { res.redirect('/'); }
+    (req, res) => {
+      res.redirect('/');
+    }
   );
 
   // signout the user
@@ -35,8 +34,12 @@ const userAPI = (app) => {
   // get user full profile
   app.get('/api/user/profile/:username', (req, res) => {
     getFullProfile(req.params.username).then(
-      result => { res.send(result); },
-      error => { res.send({ error }); }
+      result => {
+        res.send(result);
+      },
+      error => {
+        res.send({ error });
+      }
     );
   });
 };

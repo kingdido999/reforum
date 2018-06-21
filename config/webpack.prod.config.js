@@ -18,11 +18,9 @@ const viewsPath = path.resolve(__dirname, '../frontend', 'Views');
  * webpack production configuration
  */
 module.exports = {
-  target  : 'web',
+  target: 'web',
 
-  entry: [
-    mainAppPath,
-  ],
+  entry: [mainAppPath],
 
   output: {
     filename: 'bundle.js',
@@ -33,7 +31,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: [ 'react-hot', 'babel-loader' ],
+        loaders: ['react-hot', 'babel-loader'],
         exclude: [nodeModulesPath],
       },
       {
@@ -44,11 +42,14 @@ module.exports = {
         ),
       },
       { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
-      { test: /\.svg$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
+      {
+        test: /\.svg$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      },
     ],
   },
 
-  postcss: [ require('autoprefixer'), require('postcss-nesting') ],
+  postcss: [require('autoprefixer'), require('postcss-nesting')],
 
   plugins: [
     new webpack.optimize.DedupePlugin(),
@@ -68,10 +69,10 @@ module.exports = {
   },
 
   externals: {
-    'react': 'React',
+    react: 'React',
     'react-dom': 'ReactDOM',
-    'redux': 'Redux',
+    redux: 'Redux',
     'react-router': 'ReactRouter',
-    'moment': 'moment',
+    moment: 'moment',
   },
 };

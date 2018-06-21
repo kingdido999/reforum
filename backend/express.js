@@ -14,7 +14,6 @@ const flash = require('connect-flash');
  * express configuration
  */
 const expressConfig = (app, serverConfigs) => {
-
   // apply gzip compression (should be placed before express.static)
   app.use(compress());
 
@@ -29,15 +28,17 @@ const expressConfig = (app, serverConfigs) => {
   app.use(cookieParser());
 
   // use session with mongo
-  app.use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: 'secret',
-    store: new mongoStore({
-      url: serverConfigs.DBURL,
-      collection : 'sessions',
-    }),
-  }));
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: true,
+      secret: 'secret',
+      store: new mongoStore({
+        url: serverConfigs.DBURL,
+        collection: 'sessions',
+      }),
+    })
+  );
 
   // use passport session
   app.use(passport.initialize());
