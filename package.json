@@ -28,7 +28,8 @@
     "start": "better-npm-run start",
     "start:dev": "better-npm-run start:dev",
     "build": "webpack --config config/webpack.prod.config.js",
-    "format": "prettier-standard '**/*.js'"
+    "format": "prettier-standard '**/*.js'",
+    "precommit": "lint-staged"
   },
   "betterScripts": {
     "start": {
@@ -44,6 +45,14 @@
         "NODE_ENV": "development",
         "PORT": 8080
       }
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "src/**/*.js": [
+        "prettier-standard",
+        "git add"
+      ]
     }
   },
   "dependencies": {
@@ -82,7 +91,9 @@
     "eslint-plugin-react": "^6.8.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "husky": "^0.14.3",
     "jest": "^20.0.4",
+    "lint-staged": "^7.2.0",
     "moment": "^2.17.1",
     "nock": "^9.0.13",
     "postcss-loader": "^1.2.2",
