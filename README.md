@@ -43,10 +43,7 @@ First we need to clone the repository:
 $ git clone https://github.com/shoumma/ReForum
 ```
 
-Then we have to install the necessary dependencies using either NPM or Yarn:
-```
-$ npm i
-```
+Then we have to install the necessary dependencies using Yarn:
 ```
 $ yarn
 ```
@@ -75,12 +72,12 @@ Now we are ready to run the application. You can run either run the development 
 
 To run the app in development environment:
 ```
-$ npm run start:dev
+$ yarn start:dev
 ```
 
 To run the app in production environment:
 ```
-$ npm run start
+$ yarn start
 ```
 
 Now, if you visit [http://localhost:8080](http://localhost:8080) (if you ran the dev), or the production URL, you will see that the application is up and running. Congratulation! But, wait a minute, it's showing you `Sorry, couldn't find the forum`. That is because, we didn't create any forum yet. You can now sign up via github and then visit the admin panel with the url [http://localhost:8080/admin](http://localhost:8080/admin). The application is currently configured in a way that, the first user will become the admin for the system.
