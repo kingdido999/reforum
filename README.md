@@ -59,21 +59,16 @@ We need to grab the following information from the OAuth application.
 * Callback URL
 
 The `Callback URL` is the domain where GitHub will redirect the user after a successful login. You can use a domain name or local host. But we need to append the URL with the path `/api/user/authViaGitHub/callback`. So, the complete url will look like:
-`https://localhost:8080/api/user/authViaGitHub/callback`
+`http://localhost:8080/api/user/authViaGitHub/callback`
 
 Now, we need to configure the credentials inside of the codebase. Open the file `config/credentials.js` add the necessary information. The file looks like this:
 ```js
 module.exports = {
   GITHUB_CLIENT_ID: '',
   GITHUB_CLIENT_SECRET: '',
-  GITHUB_CALLBACK_URL: '',
-  DBURL: '',
+  GITHUB_CALLBACK_URL: 'http://localhost:8080/api/user/authViaGitHub/callback',
+  DBURL: 'mongodb://localhost:27017/reforum'
 };
-```
-
-We need to provide all the information here. You can notice that we need the database url here too. My `local` MongoDB url looks like:
-```
-mongodb://localhost:27017/reforum
 ```
 
 Now we are ready to run the application. You can run either run the development environment of the application which will include Hot-Reload for JS codes using Webpack and the Redux dev tool extension, or you can run the production edition. The default port for developer edition is `8080`, and for production is `process.env.PORT`.

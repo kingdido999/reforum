@@ -17,3 +17,9 @@ coverage
 
 # OSX stuffs
 .DS_Store
+
+# IDE
+.vscode
+
+# config
+config/credentials.js
