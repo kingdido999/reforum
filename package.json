@@ -49,7 +49,7 @@
   },
   "lint-staged": {
     "linters": {
-      "src/**/*.js": [
+      "**/*.js": [
         "prettier-standard",
         "git add"
       ]
