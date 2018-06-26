@@ -51,14 +51,6 @@ class UserMenu extends Component {
                   <span className={styles.btnLabel}>GitHub</span>
                 </Button>
               </a>
-              {/* <a className={styles.signInLink} href={'/api/user/authViaEmail'}>
-                <Button className={styles.gitLoginBtn} alwaysActive>
-                  <i
-                    className={classnames('fa fa-envelope', styles.subMenuOcto)}
-                  />
-                  <span className={styles.btnLabel}>Email</span>
-                </Button>
-              </a> */}
             </div>
           )}
 
@@ -83,7 +75,7 @@ class UserMenu extends Component {
   }
 
   render () {
-    const { signedIn, userName, avatar, signOutAction } = this.props
+    const { signedIn, userName, avatar } = this.props
 
     if (signedIn) {
       return (
@@ -103,13 +95,14 @@ class UserMenu extends Component {
 
     return (
       <div className={styles.container}>
-        <Button
-          alwaysActive
-          className={classnames(styles.signInBtn, styles.title)}
-          onClick={this.toggleSubMenu}
-        >
-          登录
-        </Button>
+        <Link to='/login'>
+          <Button
+            alwaysActive
+            className={classnames(styles.signInBtn, styles.title)}
+          >
+            登录
+          </Button>
+        </Link>
 
         <Link to='/signup'>
           <Button

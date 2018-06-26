@@ -44,6 +44,14 @@ const userAPI = app => {
     )
   })
 
+  // Login with username and password
+  app.post('/api/user/login', (req, res) => {
+    passport.authenticate('local')(req, res, function () {
+      res.send({ user: req.user })
+    })
+  })
+
+  // Sign up with username and password
   app.post('/api/user/signup', async (req, res) => {
     const { username, email, password } = req.body
     let user = await User.findOne({
@@ -62,7 +70,6 @@ const userAPI = app => {
       }
 
       passport.authenticate('local')(req, res, function () {
-        console.log(req.user)
         res.send({ user: req.user })
       })
     }

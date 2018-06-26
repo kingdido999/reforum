@@ -15,6 +15,7 @@ import ForumFeed from '../Views/ForumFeed'
 import SingleDiscussion from '../Views/SingleDiscussion'
 import NewDiscussion from '../Views/NewDiscussion'
 import UserProfile from '../Views/UserProfile'
+import UserLogIn from '../Views/UserLogIn'
 import UserSignUp from '../Views/UserSignUp'
 import NotFound from '../Views/NotFound'
 
@@ -24,6 +25,7 @@ ReactDOM.render(
       <Route path='/admin' component={AdminContainer}>
         <IndexRoute component={Dashboard} />
       </Route>
+      <Route path='/login' component={UserLogIn} />
       <Route path='/signup' component={UserSignUp} />
       <Route path='/' component={AppContainer}>
         <IndexRoute component={ForumFeed} />
