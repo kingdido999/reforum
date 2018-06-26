@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import styles from './styles'
+import { Link } from 'react-router'
 
 const Logo = () => {
   return (
-    <div className={styles.logoContainer}>
+    <Link className={styles.logoContainer} to='/'>
       <div className={styles.logo}>
         <svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
           <g
@@ -29,7 +30,7 @@ const Logo = () => {
         </svg>
       </div>
       <div className={styles.logoTitle}>ReForum</div>
-    </div>
+    </Link>
   )
 }
 
