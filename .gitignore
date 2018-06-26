@@ -1,9 +1,6 @@
 # dependency
 node_modules
 
-# yarn
-yarn.lock
-
 # npm cache
 .npm
 

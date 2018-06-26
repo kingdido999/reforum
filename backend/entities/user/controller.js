@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const asyncEach = require('async/each')
+const bcrypt = require('bcrypt')
 
 // controllers
 const getAllOpinions = require('../opinion/controller').getAllOpinions
@@ -23,6 +24,26 @@ const getUser = user_id => {
       } else if (!user) reject(null)
       else resolve(user)
     })
+  })
+}
+
+const signInViaLocal = (username, password) => {
+  return new Promise(async (resolve, reject) => {
+    let user = await User.findOne({
+      $or: [{ email: username }, { username }],
+    }).exec()
+
+    if (user) {
+      const isMatch = await bcrypt.compare(password, user.password)
+
+      if (isMatch) {
+        resolve(user)
+      } else {
+        reject('密码错误。')
+      }
+    } else {
+      reject('该用户不存在。')
+    }
   })
 }
 
@@ -59,8 +80,8 @@ const signInViaGithub = gitProfile => {
             (user.github.bio = gitProfile._json.bio),
             (user.github.followers = gitProfile._json.followers),
             (user.github.following = gitProfile._json.following),
-            // save the info and resolve the user doc
             user.save(error => {
+              // save the info and resolve the user doc
               if (error) {
                 console.log(error)
                 reject(error)
@@ -174,6 +195,7 @@ const getFullProfile = username => {
 }
 
 module.exports = {
+  signInViaLocal,
   signInViaGithub,
   getUser,
   getFullProfile,

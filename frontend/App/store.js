@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { combineReducers } from 'redux'
 import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
 import { appReducer, userReducer } from './reducers'
 import { feedReducer } from '../Views/ForumFeed/reducers'
@@ -22,12 +23,12 @@ const rootReducer = combineReducers({
 
 // dev tool extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
+const middleware = [thunk, logger]
 // application store
 let store = createStore(
   rootReducer,
   /* preloaded state, */
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(...middleware))
 )
 
 export default store

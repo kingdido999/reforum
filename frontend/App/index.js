@@ -11,11 +11,11 @@ import appStore from './store'
 import AppContainer from './App'
 import AdminContainer from './Admin'
 import Dashboard from '../Views/AdminDashboard'
-import Header from 'Containers/Header'
 import ForumFeed from '../Views/ForumFeed'
 import SingleDiscussion from '../Views/SingleDiscussion'
 import NewDiscussion from '../Views/NewDiscussion'
 import UserProfile from '../Views/UserProfile'
+import UserSignUp from '../Views/UserSignUp'
 import NotFound from '../Views/NotFound'
 
 ReactDOM.render(
@@ -24,6 +24,7 @@ ReactDOM.render(
       <Route path='/admin' component={AdminContainer}>
         <IndexRoute component={Dashboard} />
       </Route>
+      <Route path='/signup' component={UserSignUp} />
       <Route path='/' component={AppContainer}>
         <IndexRoute component={ForumFeed} />
         <Route path=':forum' component={ForumFeed} />

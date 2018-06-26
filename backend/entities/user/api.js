@@ -1,6 +1,7 @@
 const passport = require('passport')
 const signIn = require('./controller').signIn
 const getFullProfile = require('./controller').getFullProfile
+const User = require('./model')
 
 /**
  * user apis
@@ -41,6 +42,30 @@ const userAPI = app => {
         res.send({ error })
       }
     )
+  })
+
+  app.post('/api/user/signup', async (req, res) => {
+    const { username, email, password } = req.body
+    let user = await User.findOne({
+      $or: [{ email }, { username }],
+    }).exec()
+
+    if (user) {
+      res.status(400).send({ error: '用户名或邮箱已被注册。' })
+    } else {
+      user = new User({ username, email, password })
+
+      try {
+        await user.save()
+      } catch (err) {
+        throw err
+      }
+
+      passport.authenticate('local')(req, res, function () {
+        console.log(req.user)
+        res.send({ user: req.user })
+      })
+    }
   })
 }
 

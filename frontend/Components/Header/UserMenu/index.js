@@ -39,14 +39,27 @@ class UserMenu extends Component {
           </Button>
 
           {!signedIn && (
-            <a className={styles.signInLink} href={'/api/user/authViaGitHub'}>
-              <Button className={styles.gitLoginBtn} alwaysActive>
-                <i
-                  className={classnames('fa fa-github-alt', styles.subMenuOcto)}
-                />
-                <span className={styles.btnLabel}>With GitHub</span>
-              </Button>
-            </a>
+            <div>
+              <a className={styles.signInLink} href={'/api/user/authViaGitHub'}>
+                <Button className={styles.gitLoginBtn} alwaysActive>
+                  <i
+                    className={classnames(
+                      'fa fa-github-alt',
+                      styles.subMenuOcto
+                    )}
+                  />
+                  <span className={styles.btnLabel}>GitHub</span>
+                </Button>
+              </a>
+              {/* <a className={styles.signInLink} href={'/api/user/authViaEmail'}>
+                <Button className={styles.gitLoginBtn} alwaysActive>
+                  <i
+                    className={classnames('fa fa-envelope', styles.subMenuOcto)}
+                  />
+                  <span className={styles.btnLabel}>Email</span>
+                </Button>
+              </a> */}
+            </div>
           )}
 
           {signedIn && (
@@ -95,8 +108,17 @@ class UserMenu extends Component {
           className={classnames(styles.signInBtn, styles.title)}
           onClick={this.toggleSubMenu}
         >
-          Sign Up / Sign In
+          登录
         </Button>
+
+        <Link to='/signup'>
+          <Button
+            alwaysActive
+            className={classnames(styles.signInBtn, styles.title)}
+          >
+            注册
+          </Button>
+        </Link>
 
         {this.renderSubMenu()}
       </div>
