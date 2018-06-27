@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'Components/Button'
-import PropTypes from 'prop-types'
 import { login } from './actions'
+import classnames from 'classnames'
+import appLayout from 'SharedStyles/appLayout.css'
+import formStyle from 'SharedStyles/form.css'
 
 class UserLogIn extends Component {
   constructor (props) {
@@ -29,27 +31,28 @@ class UserLogIn extends Component {
 
   render () {
     return (
-      <div>
-        <form>
-          <div>
-            <label>用户名/邮箱:</label>
+      <div className={classnames(appLayout.container)}>
+        <form className={classnames(formStyle.form)}>
+          <h2>登录</h2>
+          <div className={classnames(formStyle.inputField)}>
             <input
               type='text'
               name='username'
               value={this.state.username}
+              placeholder='用户名或邮箱'
               onChange={this.handleChange}
             />
           </div>
-          <div>
-            <label>密码:</label>
+          <div className={classnames(formStyle.inputField)}>
             <input
               type='password'
               name='password'
+              placeholder='密码'
               value={this.state.password}
               onChange={this.handleChange}
             />
           </div>
-          <div>
+          <div className={classnames(formStyle.inputField)}>
             <Button onClick={this.handleSubmit}>登录</Button>
           </div>
         </form>

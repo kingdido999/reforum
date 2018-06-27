@@ -25,8 +25,6 @@ ReactDOM.render(
       <Route path='/admin' component={AdminContainer}>
         <IndexRoute component={Dashboard} />
       </Route>
-      <Route path='/login' component={UserLogIn} />
-      <Route path='/signup' component={UserSignUp} />
       <Route path='/' component={AppContainer}>
         <IndexRoute component={ForumFeed} />
         <Route path=':forum' component={ForumFeed} />
@@ -36,6 +34,8 @@ ReactDOM.render(
         />
         <Route path=':forum/new_discussion' component={NewDiscussion} />
         <Route path='user/:username' component={UserProfile} />
+        <Route path='user/auth/login' component={UserLogIn} />
+        <Route path='user/auth/signup' component={UserSignUp} />
         <Route path='*' component={NotFound} />
       </Route>
     </Router>

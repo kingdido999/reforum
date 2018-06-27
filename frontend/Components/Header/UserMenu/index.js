@@ -96,22 +96,12 @@ class UserMenu extends Component {
 
     return (
       <div className={styles.container}>
-        <Link to='/login'>
-          <Button
-            alwaysActive
-            className={classnames(styles.signInBtn, styles.title)}
-          >
-            登录
-          </Button>
+        <Link to='/user/auth/login' className={classnames(styles.signInLink)}>
+          登录
         </Link>
 
-        <Link to='/signup'>
-          <Button
-            alwaysActive
-            className={classnames(styles.signInBtn, styles.title)}
-          >
-            注册
-          </Button>
+        <Link to='/user/auth/signup' className={classnames(styles.signInLink)}>
+          注册
         </Link>
 
         {this.renderSubMenu()}
