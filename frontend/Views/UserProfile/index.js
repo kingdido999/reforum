@@ -56,11 +56,12 @@ class UserProfile extends Component {
           <title>{`${name || username} | ReForum`}</title>
         </Helmet>
 
+        {/* TODO */}
         <div className={appLayout.primaryContent}>
           <Profile
-            name={name}
+            name={name || username}
             gitHandler={username}
-            location={github.location}
+            location={github ? github.location : ''}
             avatarUrl={avatarUrl}
           />
 
