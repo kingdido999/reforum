@@ -32,6 +32,7 @@ const signInViaLocal = (username, password) => {
     let user = await User.findOne({
       $or: [{ email: username }, { username }],
     }).exec()
+    const errorMsg = '用户名或密码错误。'
 
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password)
@@ -39,10 +40,10 @@ const signInViaLocal = (username, password) => {
       if (isMatch) {
         resolve(user)
       } else {
-        reject('密码错误。')
+        reject(errorMsg)
       }
     } else {
-      reject('该用户不存在。')
+      reject(errorMsg)
     }
   })
 }

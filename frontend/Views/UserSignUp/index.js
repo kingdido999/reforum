@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 import Button from 'Components/Button'
 import { signUp } from './actions'
 
@@ -25,13 +24,7 @@ class UserSignUp extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-
-    try {
-      await this.props.signUp(this.state)
-      browserHistory.push('/')
-    } catch (err) {
-      console.log(err)
-    }
+    this.props.signUp(this.state)
   }
 
   render () {

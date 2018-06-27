@@ -46,8 +46,12 @@ const userAPI = app => {
 
   // Login with username and password
   app.post('/api/user/login', (req, res) => {
-    passport.authenticate('local')(req, res, function () {
-      res.send({ user: req.user })
+    passport.authenticate('local')(req, res, function (err) {
+      if (err) {
+        res.status(400).send(err)
+      } else {
+        res.send({ user: req.user })
+      }
     })
   })
 
@@ -59,7 +63,7 @@ const userAPI = app => {
     }).exec()
 
     if (user) {
-      res.status(400).send({ error: '用户名或邮箱已被注册。' })
+      res.status(400).send('用户名或邮箱已被注册。')
     } else {
       user = new User({ username, email, password })
 
@@ -69,8 +73,12 @@ const userAPI = app => {
         throw err
       }
 
-      passport.authenticate('local')(req, res, function () {
-        res.send({ user: req.user })
+      passport.authenticate('local')(req, res, function (err) {
+        if (err) {
+          res.status(400).send(err)
+        } else {
+          res.send({ user: req.user })
+        }
       })
     }
   })
