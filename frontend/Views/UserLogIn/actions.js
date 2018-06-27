@@ -8,8 +8,6 @@ export const login = user => {
     axios
       .post('/api/user/login', user)
       .then(({ data }) => {
-        console.log('logged in')
-        console.log(data)
         dispatch({ type: LOG_IN_SUCCESS, payload: data })
       })
       .catch(err => dispatch({ type: LOG_IN_FAILURE, error: err }))

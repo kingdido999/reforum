@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 import Button from 'Components/Button'
 import PropTypes from 'prop-types'
 import { login } from './actions'
@@ -22,10 +23,14 @@ class UserLogIn extends Component {
     })
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault()
-    // TODO
-    this.props.login(this.state)
+    try {
+      await this.props.login(this.state)
+      browserHistory.push('/')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   render () {
