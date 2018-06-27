@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './styles'
+import PropTypes from 'prop-types'
 
 class Counts extends Component {
   render () {
@@ -21,8 +22,8 @@ Counts.defaultProps = {
 }
 
 Counts.propTypes = {
-  count: React.PropTypes.number,
-  label: React.PropTypes.string,
+  count: PropTypes.number,
+  label: PropTypes.string,
 }
 
 export default Counts

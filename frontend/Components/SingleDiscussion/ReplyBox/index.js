@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './styles.css'
+import PropTypes from 'prop-types'
 
 import RichEditor from 'Components/RichEditor'
 
@@ -26,9 +27,9 @@ ReplyBox.defaultProps = {
 }
 
 ReplyBox.propTypes = {
-  posting: React.PropTypes.bool,
-  onSubmit: React.PropTypes.func,
-  onChange: React.PropTypes.func,
+  posting: PropTypes.bool,
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
 }
 
 export default ReplyBox

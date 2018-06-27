@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './styles.css'
+import PropTypes from 'prop-types'
 
 import Button from 'Components/Button'
 import StyleButton from './StyleButton'
@@ -45,9 +46,9 @@ class BlockStyleControls extends Component {
 }
 
 BlockStyleControls.propTypes = {
-  onToggle: React.PropTypes.func.isRequired,
-  editorState: React.PropTypes.any.isRequired,
-  type: React.PropTypes.oneOf(['newDiscussion', 'newOpinion']),
+  onToggle: PropTypes.func.isRequired,
+  editorState: PropTypes.any.isRequired,
+  type: PropTypes.oneOf(['newDiscussion', 'newOpinion']),
 }
 
 export default BlockStyleControls

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import moment from 'moment'
 import classnames from 'classnames'
 import styles from './styles.css'
+import PropTypes from 'prop-types'
 
 import PlaceholderImage from 'SharedStyles/placeholder.jpg'
 import Button from 'Components/Button'
@@ -90,17 +91,17 @@ Opinion.defaultProps = {
 }
 
 Opinion.propTypes = {
-  opinionId: React.PropTypes.string,
-  userAvatar: React.PropTypes.string,
-  userName: React.PropTypes.string,
-  userGitHandler: React.PropTypes.string,
-  opDate: React.PropTypes.any,
-  opContent: React.PropTypes.string,
-  userId: React.PropTypes.string,
-  currentUserId: React.PropTypes.string,
-  currentUserRole: React.PropTypes.string,
-  deleteAction: React.PropTypes.func,
-  deletingOpinion: React.PropTypes.any,
+  opinionId: PropTypes.string,
+  userAvatar: PropTypes.string,
+  userName: PropTypes.string,
+  userGitHandler: PropTypes.string,
+  opDate: PropTypes.any,
+  opContent: PropTypes.string,
+  userId: PropTypes.string,
+  currentUserId: PropTypes.string,
+  currentUserRole: PropTypes.string,
+  deleteAction: PropTypes.func,
+  deletingOpinion: PropTypes.any,
 }
 
 export default Opinion

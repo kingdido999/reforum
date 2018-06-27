@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './styles.css'
+import PropTypes from 'prop-types'
 
 class StyleButton extends React.Component {
   constructor () {
@@ -26,10 +27,10 @@ class StyleButton extends React.Component {
 }
 
 StyleButton.propTypes = {
-  onToggle: React.PropTypes.func.isRequired,
-  active: React.PropTypes.any.isRequired,
-  label: React.PropTypes.string.isRequired,
-  style: React.PropTypes.string.isRequired,
+  onToggle: PropTypes.func.isRequired,
+  active: PropTypes.any.isRequired,
+  label: PropTypes.string.isRequired,
+  style: PropTypes.string.isRequired,
 }
 
 export default StyleButton

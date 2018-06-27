@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './styles.css'
+import PropTypes from 'prop-types'
 
 class Profile extends Component {
   render () {
@@ -36,10 +37,10 @@ Profile.defaultProps = {
 }
 
 Profile.propTypes = {
-  name: React.PropTypes.string,
-  gitHandler: React.PropTypes.string,
-  location: React.PropTypes.string,
-  avatarUrl: React.PropTypes.string,
+  name: PropTypes.string,
+  gitHandler: PropTypes.string,
+  location: PropTypes.string,
+  avatarUrl: PropTypes.string,
 }
 
 export default Profile

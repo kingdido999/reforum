@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './styles'
+import PropTypes from 'prop-types'
 
 import Button from 'Components/Button'
 
@@ -148,11 +149,11 @@ class ForumBox extends Component {
 ForumBox.defaultProps = {}
 
 ForumBox.propTypes = {
-  forums: React.PropTypes.array,
-  deletingForum: React.PropTypes.bool,
-  deleteAction: React.PropTypes.func,
-  creatingForum: React.PropTypes.bool,
-  createAction: React.PropTypes.func,
+  forums: PropTypes.array,
+  deletingForum: PropTypes.bool,
+  deleteAction: PropTypes.func,
+  creatingForum: PropTypes.bool,
+  createAction: PropTypes.func,
 }
 
 export default ForumBox

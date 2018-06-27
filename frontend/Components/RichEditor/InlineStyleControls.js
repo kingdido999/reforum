@@ -4,6 +4,7 @@ import styles from './styles.css'
 
 import Button from 'Components/Button'
 import StyleButton from './StyleButton'
+import PropTypes from 'prop-types'
 
 class InlineStyleControls extends Component {
   render () {
@@ -35,9 +36,9 @@ class InlineStyleControls extends Component {
 }
 
 InlineStyleControls.propTypes = {
-  onToggle: React.PropTypes.func.isRequired,
-  editorState: React.PropTypes.any.isRequired,
-  type: React.PropTypes.oneOf(['newDiscussion', 'newOpinion']),
+  onToggle: PropTypes.func.isRequired,
+  editorState: PropTypes.any.isRequired,
+  type: PropTypes.oneOf(['newDiscussion', 'newOpinion']),
 }
 
 export default InlineStyleControls
