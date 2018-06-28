@@ -24,6 +24,8 @@ const userSchema = mongoose.Schema({
   },
 })
 
+userSchema.set('timestamps', true)
+
 userSchema.pre('save', function (next) {
   var user = this
 
