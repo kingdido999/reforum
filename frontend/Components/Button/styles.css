@@ -13,7 +13,7 @@ button {
   font: inherit;
   line-height: normal;
   overflow: visible;
-  padding: 0;
+  padding: 1rem;
   user-select: none;
   outline: none;
   cursor: pointer;
@@ -21,11 +21,10 @@ button {
 }
 
 .buttonDefaults {
-  padding: 10px 20px;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.5px;
+  font-size: 1rem;
+  letter-spacing: 1px;
 }
 
 .default {

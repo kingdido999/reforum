@@ -1,0 +1,12 @@
+@value secondaryFontColor from 'SharedStyles/globalStyles.css';
+
+.alert {
+  padding: 1rem;
+  border-radius: 2px;
+  color: secondaryFontColor;
+}
+
+.error {
+  border: 1px solid #ffa39e;
+  background-color: #fff1f0;
+}

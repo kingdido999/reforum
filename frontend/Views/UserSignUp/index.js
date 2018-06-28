@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'Components/Button'
+import Alert from 'Components/Alert'
 import { signUp } from './actions'
 import classnames from 'classnames'
 import appLayout from 'SharedStyles/appLayout.css'
@@ -31,10 +32,15 @@ class UserSignUp extends Component {
   }
 
   render () {
+    const { errorMsg } = this.props
+
     return (
       <div className={classnames(appLayout.container)}>
         <form className={classnames(formStyle.form)}>
           <h2>注册</h2>
+
+          {errorMsg ? <Alert type='error' message={errorMsg} /> : null}
+
           <div className={classnames(formStyle.inputField)}>
             <input
               type='text'
@@ -72,7 +78,11 @@ class UserSignUp extends Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  const { errorMsg } = state.userSignUp
+
+  return {
+    errorMsg,
+  }
 }
 
 const mapDispatchToProps = dispatch => {

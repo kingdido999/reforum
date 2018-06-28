@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'Components/Button'
+import Alert from 'Components/Alert'
 import { login } from './actions'
 import classnames from 'classnames'
 import appLayout from 'SharedStyles/appLayout.css'
@@ -30,10 +31,15 @@ class UserLogIn extends Component {
   }
 
   render () {
+    const { errorMsg } = this.props
+
     return (
       <div className={classnames(appLayout.container)}>
         <form className={classnames(formStyle.form)}>
           <h2>登录</h2>
+
+          {errorMsg ? <Alert type='error' message={errorMsg} /> : null}
+
           <div className={classnames(formStyle.inputField)}>
             <input
               type='text'
@@ -62,7 +68,11 @@ class UserLogIn extends Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  const { errorMsg } = state.userLogIn
+
+  return {
+    errorMsg,
+  }
 }
 
 const mapDispatchToProps = dispatch => {

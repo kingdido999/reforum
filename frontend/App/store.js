@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   adminInfo: adminInfoReducer,
   userProfile: userProfileReducer,
   userLogIn: userLogInReducer,
-  UserSignUp: userSignUpReducer,
+  userSignUp: userSignUpReducer,
 })
 
 // dev tool extension

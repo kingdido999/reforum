@@ -11,7 +11,7 @@ export const login = user => {
       dispatch({ type: LOG_IN_SUCCESS, payload: data })
       browserHistory.push('/')
     } catch (err) {
-      dispatch({ type: LOG_IN_FAILURE, error: err.response.data })
+      dispatch({ type: LOG_IN_FAILURE, payload: err.response.data })
     }
   }
 }
