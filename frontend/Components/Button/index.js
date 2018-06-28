@@ -46,7 +46,7 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['default', 'outline']),
+  type: PropTypes.oneOf(['default', 'outline', 'primary']),
   fullWidth: PropTypes.bool,
   noUppercase: PropTypes.bool,
   alwaysActive: PropTypes.bool,

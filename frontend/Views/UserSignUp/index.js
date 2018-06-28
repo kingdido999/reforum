@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Button from 'Components/Button'
 import Alert from 'Components/Alert'
 import Form from 'Components/Form'
+import Input from 'Components/Input'
 import ThirdPartyLogin from 'Views/ThirdPartyLogin'
 import { signUp } from './actions'
 import classnames from 'classnames'
@@ -45,7 +46,7 @@ class UserSignUp extends Component {
           ))}
 
           <Form.Item>
-            <input
+            <Input
               type='text'
               name='username'
               placeholder='用户名'
@@ -54,7 +55,7 @@ class UserSignUp extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <input
+            <Input
               type='email'
               name='email'
               placeholder='邮箱'
@@ -63,7 +64,7 @@ class UserSignUp extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <input
+            <Input
               type='password'
               name='password'
               placeholder='密码（不少于6位）'
@@ -72,7 +73,7 @@ class UserSignUp extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <Button>注册</Button>
+            <Button type='primary'>注册</Button>
           </Form.Item>
         </Form>
 

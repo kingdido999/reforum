@@ -1,4 +1,4 @@
-@value borderColor, secondaryFontColor, primaryFontColor from 'SharedStyles/globalStyles.css';
+@value borderColor, secondaryFontColor, primaryFontColor, primaryColor, primaryColorLight from 'SharedStyles/globalStyles.css';
 
 /**
  * Button styles
@@ -47,4 +47,14 @@ button {
 .alwaysActive {
   color: primaryFontColor;
   border-color: primaryFontColor;
+}
+
+.primary {
+  background: primaryColor;
+  border-color: primaryColor;
+  color: #fff;
+  transition: background 0.3s;
+  &:hover {
+    background: primaryColorLight;
+  }
 }

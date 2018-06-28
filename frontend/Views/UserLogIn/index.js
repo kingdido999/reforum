@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Button from 'Components/Button'
 import Alert from 'Components/Alert'
 import Form from 'Components/Form'
-import FontAwesomeIcon from 'Components/FontAwesomeIcon'
+import Input from 'Components/Input'
 import ThirdPartyLogin from 'Views/ThirdPartyLogin'
 import { login } from './actions'
 import classnames from 'classnames'
@@ -45,7 +45,7 @@ class UserLogIn extends Component {
           ))}
 
           <Form.Item>
-            <input
+            <Input
               type='text'
               name='username'
               value={this.state.username}
@@ -54,7 +54,7 @@ class UserLogIn extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <input
+            <Input
               type='password'
               name='password'
               placeholder='密码'
@@ -63,7 +63,7 @@ class UserLogIn extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <Button>登录</Button>
+            <Button type='primary'>登录</Button>
           </Form.Item>
         </Form>
 
