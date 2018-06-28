@@ -58,14 +58,14 @@ class UserMenu extends Component {
           {signedIn && (
             <span onClick={this.toggleSubMenu}>
               <Link className={styles.subMenuItem} to={`/user/${gitHandler}`}>
-                My Profile
+                我的账号
               </Link>
             </span>
           )}
           {/* { signedIn && <a className={styles.subMenuItem} href={'#'}>Settings</a> } */}
           {signedIn && (
             <a className={styles.subMenuItem} href={'/api/user/signout'}>
-              Sign Out
+              登出
             </a>
           )}
         </div>

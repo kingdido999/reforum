@@ -60,8 +60,8 @@ class UserProfile extends Component {
         <div className={appLayout.primaryContent}>
           <Profile
             name={name || username}
-            gitHandler={username}
-            location={github ? github.location : ''}
+            gitHandler={github ? username : null}
+            location={github ? github.location : null}
             avatarUrl={avatarUrl}
           />
 
