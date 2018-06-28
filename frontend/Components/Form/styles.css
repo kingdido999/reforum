@@ -1,9 +1,10 @@
 .form {
   display: flex;
   flex-direction: column;
+  max-width: 300px;
   margin: 0 auto;
 }
 
-.inputField {
+.formItem {
   margin: 0.6rem 0;
 }

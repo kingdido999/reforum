@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'Components/Button'
 import Alert from 'Components/Alert'
+import Form from 'Components/Form'
 import ThirdPartyLogin from 'Views/ThirdPartyLogin'
 import { signUp } from './actions'
 import classnames from 'classnames'
@@ -36,18 +37,15 @@ class UserSignUp extends Component {
     const { errors } = this.props
 
     return (
-      <div className={classnames(appLayout.container)}>
-        <form
-          onSubmit={this.handleSubmit}
-          className={classnames(formStyle.form)}
-        >
+      <div className={classnames(appLayout.containerSmall)}>
+        <Form onSubmit={this.handleSubmit}>
           <h2>注册</h2>
 
           {errors.map((msg, index) => (
             <Alert key={index} type='error' message={msg} />
           ))}
 
-          <div className={classnames(formStyle.inputField)}>
+          <Form.Item>
             <input
               type='text'
               name='username'
@@ -55,8 +53,8 @@ class UserSignUp extends Component {
               value={this.state.username}
               onChange={this.handleChange}
             />
-          </div>
-          <div className={classnames(formStyle.inputField)}>
+          </Form.Item>
+          <Form.Item>
             <input
               type='email'
               name='email'
@@ -64,8 +62,8 @@ class UserSignUp extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             />
-          </div>
-          <div className={classnames(formStyle.inputField)}>
+          </Form.Item>
+          <Form.Item>
             <input
               type='password'
               name='password'
@@ -73,15 +71,13 @@ class UserSignUp extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-          </div>
-          <div className={classnames(formStyle.inputField)}>
+          </Form.Item>
+          <Form.Item>
             <Button>注册</Button>
-          </div>
-        </form>
+          </Form.Item>
+        </Form>
 
-        <div className={classnames(formStyle.form)}>
-          <ThirdPartyLogin />
-        </div>
+        <ThirdPartyLogin />
       </div>
     )
   }

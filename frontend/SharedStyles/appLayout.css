@@ -12,8 +12,8 @@
   @media mediumBP { padding: 0px 15px; }
 }
 
-.container {
-  width: 600px;
+.containerSmall {
+  width: 300px;
   max-width: 100%;
   margin: 0 auto;
 }

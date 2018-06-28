@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'Components/Button'
 import Alert from 'Components/Alert'
+import Form from 'Components/Form'
 import FontAwesomeIcon from 'Components/FontAwesomeIcon'
 import ThirdPartyLogin from 'Views/ThirdPartyLogin'
 import { login } from './actions'
@@ -36,18 +37,15 @@ class UserLogIn extends Component {
     const { errors } = this.props
 
     return (
-      <div className={classnames(appLayout.container)}>
-        <form
-          onSubmit={this.handleSubmit}
-          className={classnames(formStyle.form)}
-        >
+      <div className={classnames(appLayout.containerSmall)}>
+        <Form onSubmit={this.handleSubmit}>
           <h2>登录</h2>
 
           {errors.map((msg, index) => (
             <Alert key={index} type='error' message={msg} />
           ))}
 
-          <div className={classnames(formStyle.inputField)}>
+          <Form.Item>
             <input
               type='text'
               name='username'
@@ -55,8 +53,8 @@ class UserLogIn extends Component {
               placeholder='用户名或邮箱'
               onChange={this.handleChange}
             />
-          </div>
-          <div className={classnames(formStyle.inputField)}>
+          </Form.Item>
+          <Form.Item>
             <input
               type='password'
               name='password'
@@ -64,15 +62,13 @@ class UserLogIn extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-          </div>
-          <div className={classnames(formStyle.inputField)}>
+          </Form.Item>
+          <Form.Item>
             <Button>登录</Button>
-          </div>
-        </form>
+          </Form.Item>
+        </Form>
 
-        <div className={classnames(formStyle.form)}>
-          <ThirdPartyLogin />
-        </div>
+        <ThirdPartyLogin />
       </div>
     )
   }
