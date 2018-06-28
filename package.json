@@ -28,7 +28,7 @@
     "start": "better-npm-run start",
     "start:dev": "better-npm-run start:dev",
     "build": "webpack --config config/webpack.prod.config.js",
-    "format": "prettier-standard '**/*.js'",
+    "format": "prettier-standard '{backend,frontend,config}/**/*.js'",
     "precommit": "lint-staged"
   },
   "betterScripts": {
@@ -49,7 +49,7 @@
   },
   "lint-staged": {
     "linters": {
-      "**/*.js": [
+      "{backend,frontend,config}/**/*.js": [
         "prettier-standard",
         "git add"
       ]
