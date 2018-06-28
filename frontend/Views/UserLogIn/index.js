@@ -8,7 +8,6 @@ import ThirdPartyLogin from 'Views/ThirdPartyLogin'
 import { login } from './actions'
 import classnames from 'classnames'
 import appLayout from 'SharedStyles/appLayout.css'
-import formStyle from 'SharedStyles/form.css'
 
 class UserLogIn extends Component {
   constructor (props) {

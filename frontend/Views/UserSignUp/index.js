@@ -7,7 +7,6 @@ import ThirdPartyLogin from 'Views/ThirdPartyLogin'
 import { signUp } from './actions'
 import classnames from 'classnames'
 import appLayout from 'SharedStyles/appLayout.css'
-import formStyle from 'SharedStyles/form.css'
 
 class UserSignUp extends Component {
   constructor (props) {

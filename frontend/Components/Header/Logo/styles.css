@@ -1,4 +1,11 @@
+@value primaryFontColor from 'SharedStyles/globalStyles.css';
+
 /* logo */
+.logoLink {
+  text-decoration: none;
+  color: primaryFontColor;
+}
+
 .logoContainer {
   display: flex;
   flex-flow: row nowrap;
