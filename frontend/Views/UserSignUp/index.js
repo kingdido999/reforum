@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'Components/Button'
 import Alert from 'Components/Alert'
+import ThirdPartyLogin from 'Views/ThirdPartyLogin'
 import { signUp } from './actions'
 import classnames from 'classnames'
 import appLayout from 'SharedStyles/appLayout.css'
@@ -36,7 +37,10 @@ class UserSignUp extends Component {
 
     return (
       <div className={classnames(appLayout.container)}>
-        <form className={classnames(formStyle.form)}>
+        <form
+          onSubmit={this.handleSubmit}
+          className={classnames(formStyle.form)}
+        >
           <h2>注册</h2>
 
           {errorMsg ? <Alert type='error' message={errorMsg} /> : null}
@@ -69,9 +73,13 @@ class UserSignUp extends Component {
             />
           </div>
           <div className={classnames(formStyle.inputField)}>
-            <Button onClick={this.handleSubmit}>注册</Button>
+            <Button>注册</Button>
           </div>
         </form>
+
+        <div className={classnames(formStyle.form)}>
+          <ThirdPartyLogin />
+        </div>
       </div>
     )
   }
