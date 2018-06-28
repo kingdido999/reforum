@@ -82,11 +82,14 @@ class UserMenu extends Component {
       return (
         <div style={{ position: 'relative' }}>
           <div className={styles.container} onClick={this.toggleSubMenu}>
-            <img
-              className={styles.userAvatar}
-              src={avatar}
-              alt={`${userName} Avatar`}
-            />
+            {avatar ? (
+              <img
+                className={styles.userAvatar}
+                src={avatar}
+                alt={`${userName} Avatar`}
+              />
+            ) : null}
+
             <span className={styles.title}>{userName}</span>
           </div>
           {this.renderSubMenu()}
@@ -114,7 +117,6 @@ UserMenu.defaultProps = {
   signedIn: false,
   userName: '',
   gitHandler: '',
-  avatar: '',
 }
 
 UserMenu.propTypes = {
