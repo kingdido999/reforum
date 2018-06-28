@@ -1,6 +1,7 @@
 @value secondaryFontColor from 'SharedStyles/globalStyles.css';
 
 .alert {
+  margin: 0.4rem 0;
   padding: 1rem;
   border-radius: 2px;
   color: secondaryFontColor;

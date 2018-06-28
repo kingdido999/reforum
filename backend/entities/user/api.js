@@ -10,7 +10,7 @@ const userAPI = app => {
   // get authenticated user
   app.get('/api/user/getUser', (req, res) => {
     if (req.user) res.send(req.user)
-    else res.send(null)
+    else res.send({})
   })
 
   // github authentication route
@@ -45,19 +45,36 @@ const userAPI = app => {
   })
 
   // Login with username and password
-  app.post('/api/user/login', (req, res) => {
+  app.post('/api/user/login', (req, res, next) => {
+    const { username, password } = req.body
+    let errors = []
+
+    if (username.trim() === '') {
+      errors.push('用户名不能为空。')
+    }
+
+    if (password.trim() === '') {
+      errors.push('密码不能为空。')
+    }
+
+    if (errors.length > 0) {
+      res.status(400).send(errors)
+      return next()
+    }
+
     passport.authenticate('local')(req, res, function (err) {
       if (err) {
         res.status(400).send(err)
       } else {
-        res.send({ user: req.user })
+        res.send('Authenticated.')
       }
     })
   })
 
   // Sign up with username and password
-  app.post('/api/user/signup', async (req, res) => {
+  app.post('/api/user/signup', async (req, res, next) => {
     const { username, email, password } = req.body
+
     let user = await User.findOne({
       $or: [{ email }, { username }],
     }).exec()
@@ -69,17 +86,23 @@ const userAPI = app => {
 
       try {
         await user.save()
-      } catch (err) {
-        throw err
-      }
 
-      passport.authenticate('local')(req, res, function (err) {
-        if (err) {
-          res.status(400).send(err)
+        passport.authenticate('local')(req, res, function (err) {
+          if (err) {
+            res.status(400).send(err)
+          } else {
+            res.send('Authenticated.')
+          }
+        })
+      } catch (err) {
+        const { errors } = err
+        if (errors) {
+          const errorMsgs = Object.keys(errors).map(key => errors[key].message)
+          res.status(400).send(errorMsgs)
         } else {
-          res.send({ user: req.user })
+          res.status(500).send(err)
         }
-      })
+      }
     }
   })
 }

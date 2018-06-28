@@ -43,15 +43,18 @@ export const updateCurrentForum = currentForum => {
  * @return {action}
  */
 export const getUser = () => {
+  console.log(1)
   return (dispatch, getState) => {
     dispatch({ type: START_FETCHING_USER })
 
     fetchUser().then(
       data => {
+        console.log(3)
+        console.log(data)
         if (!data.data._id) dispatch({ type: FETCHING_USER_FAILURE })
         else dispatch({ type: FETCHING_USER_SUCCESS, payload: data.data })
       },
-      error => dispatch({ type: FETCHING_USER_FAILURE })
+      error => dispatch({ type: FETCHING_USER_FAILURE, payload: error })
     )
   }
 }

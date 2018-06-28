@@ -33,7 +33,7 @@ class UserLogIn extends Component {
   }
 
   render () {
-    const { errorMsg } = this.props
+    const { errors } = this.props
 
     return (
       <div className={classnames(appLayout.container)}>
@@ -43,7 +43,9 @@ class UserLogIn extends Component {
         >
           <h2>登录</h2>
 
-          {errorMsg ? <Alert type='error' message={errorMsg} /> : null}
+          {errors.map((msg, index) => (
+            <Alert key={index} type='error' message={msg} />
+          ))}
 
           <div className={classnames(formStyle.inputField)}>
             <input
@@ -77,10 +79,10 @@ class UserLogIn extends Component {
 }
 
 const mapStateToProps = state => {
-  const { errorMsg } = state.userLogIn
+  const { errors } = state.userLogIn
 
   return {
-    errorMsg,
+    errors,
   }
 }
 

@@ -6,11 +6,20 @@ const bcrypt = require('bcrypt')
 const SALT_WORK_FACTOR = 10
 
 const userSchema = mongoose.Schema({
+  username: {
+    type: String,
+    required: [true, '用户名不能为空。'],
+  },
+  email: {
+    type: String,
+    required: [true, '邮箱不能为空。'],
+  },
+  password: {
+    type: String,
+    minlength: [6, '密码不能少于6位。'],
+  },
   name: String,
-  username: String,
   avatarUrl: String,
-  email: String,
-  password: String,
   role: { type: String, default: 'user' }, // ['admin', 'moderator', 'user']
   github: {
     id: Number,

@@ -2,7 +2,7 @@ import { LOG_IN_START, LOG_IN_SUCCESS, LOG_IN_FAILURE } from './constants'
 
 const initialState = {
   loading: false,
-  errorMsg: null,
+  errors: [],
 }
 
 export const userLogInReducer = (state = initialState, action) => {
@@ -11,19 +11,21 @@ export const userLogInReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        errorMsg: null,
+        errors: [],
       }
     case LOG_IN_SUCCESS:
       return {
         ...state,
         loading: false,
-        errorMsg: null,
+        errors: [],
       }
     case LOG_IN_FAILURE:
       return {
         ...state,
         loading: false,
-        errorMsg: action.payload,
+        errors: Array.isArray(action.payload)
+          ? [...action.payload]
+          : [action.payload],
       }
     default:
       return state

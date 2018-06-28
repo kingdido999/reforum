@@ -33,7 +33,7 @@ class UserSignUp extends Component {
   }
 
   render () {
-    const { errorMsg } = this.props
+    const { errors } = this.props
 
     return (
       <div className={classnames(appLayout.container)}>
@@ -43,7 +43,9 @@ class UserSignUp extends Component {
         >
           <h2>注册</h2>
 
-          {errorMsg ? <Alert type='error' message={errorMsg} /> : null}
+          {errors.map((msg, index) => (
+            <Alert key={index} type='error' message={msg} />
+          ))}
 
           <div className={classnames(formStyle.inputField)}>
             <input
@@ -67,7 +69,7 @@ class UserSignUp extends Component {
             <input
               type='password'
               name='password'
-              placeholder='密码'
+              placeholder='密码（不少于6位）'
               value={this.state.password}
               onChange={this.handleChange}
             />
@@ -86,10 +88,10 @@ class UserSignUp extends Component {
 }
 
 const mapStateToProps = state => {
-  const { errorMsg } = state.userSignUp
+  const { errors } = state.userSignUp
 
   return {
-    errorMsg,
+    errors,
   }
 }
 

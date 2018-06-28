@@ -2,7 +2,7 @@ import { SIGN_UP_START, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from './constants'
 
 const initialState = {
   loading: false,
-  errorMsg: null,
+  errors: [],
 }
 
 export const userSignUpReducer = (state = initialState, action) => {
@@ -11,19 +11,21 @@ export const userSignUpReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        errorMsg: null,
+        errors: [],
       }
     case SIGN_UP_SUCCESS:
       return {
         ...state,
         loading: false,
-        errorMsg: null,
+        errors: [],
       }
     case SIGN_UP_FAILURE:
       return {
         ...state,
         loading: false,
-        errorMsg: action.payload,
+        errors: Array.isArray(action.payload)
+          ? [...action.payload]
+          : [action.payload],
       }
     default:
       return state

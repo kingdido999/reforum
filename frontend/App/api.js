@@ -5,5 +5,6 @@ export const fetchForums = forum_id => {
 }
 
 export const fetchUser = () => {
+  console.log(2)
   return axios.get('/api/user/getUser')
 }

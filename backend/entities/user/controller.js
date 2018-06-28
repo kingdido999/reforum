@@ -32,6 +32,7 @@ const signInViaLocal = (username, password) => {
     let user = await User.findOne({
       $or: [{ email: username }, { username }],
     }).exec()
+
     const errorMsg = '用户名或密码错误。'
 
     if (user) {
