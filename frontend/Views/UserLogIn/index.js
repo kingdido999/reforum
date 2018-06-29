@@ -41,7 +41,7 @@ class UserLogIn extends Component {
           <h2>登录</h2>
 
           {errors.map((msg, index) => (
-            <Alert key={index} type='error' message={msg} />
+            <Alert key={index} error message={msg} />
           ))}
 
           <Form.Item>

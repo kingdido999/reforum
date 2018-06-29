@@ -42,7 +42,7 @@ class UserSignUp extends Component {
           <h2>注册</h2>
 
           {errors.map((msg, index) => (
-            <Alert key={index} type='error' message={msg} />
+            <Alert key={index} error message={msg} />
           ))}
 
           <Form.Item>

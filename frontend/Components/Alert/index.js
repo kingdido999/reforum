@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import styles from './styles'
+import styled, { css } from 'styled-components'
+
+const StyledAlert = styled.div`
+  margin: 0.4rem 0;
+  padding: 1rem;
+  border-radius: ${props => props.theme.borderRadius};
+  color: ${props => props.theme.fontColorLight};
+
+  ${props =>
+    props.error &&
+    css`
+      border: 1px solid #ffa39e;
+      background-color: #fff1f0;
+    `};
+`
 
 class Alert extends Component {
   render () {
-    const { type, message } = this.props
-    return (
-      <div className={classnames(styles.alert, styles[type])}>{message}</div>
-    )
+    const { message } = this.props
+    return <StyledAlert {...this.props}>{message}</StyledAlert>
   }
 }
 
 Alert.propTypes = {
-  type: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
 }
 
