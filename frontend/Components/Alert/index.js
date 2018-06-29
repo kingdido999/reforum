@@ -8,6 +8,7 @@ const StyledAlert = styled.div`
   border-radius: ${props => props.theme.borderRadius};
   color: ${props => props.theme.fontColorLight};
 
+  /* Error Alert */
   ${props =>
     props.error &&
     css`

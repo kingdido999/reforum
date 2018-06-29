@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const StyledButton = styled.button`
   border: 1px solid ${props => props.theme.borderColor};
@@ -10,16 +10,23 @@ const StyledButton = styled.button`
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 1px;
-  color: ${props => (props.primary ? 'white' : props.theme.fontColor)};
-  background: ${props => (props.primary ? props.theme.primaryColor : 'white')};
-  border-color: ${props =>
-    props.primary ? props.theme.primaryColor : props.theme.borderColor};
+  color: ${props => props.theme.fontColor};
+  background: white;
+  border-color: ${props => props.theme.borderColor};
   width: 100%;
   transition: background 0.3s;
-  &:hover {
-    background: ${props =>
-      props.primary ? props.theme.primaryColorLight : 'white'};
-  }
+
+  /* Primary Button */
+  ${props =>
+    props.primary &&
+    css`
+      color: white;
+      background: ${props => props.theme.primaryColor};
+      border-color: ${props => props.theme.primaryColor};
+      &:hover {
+        background: ${props => props.theme.primaryColorLight};
+      }
+    `};
 `
 
 class Button extends Component {
@@ -34,23 +41,9 @@ class Button extends Component {
   }
 }
 
-Button.defaultProps = {
-  type: 'default',
-  fullWidth: false,
-  noUppercase: false,
-  alwaysActive: false,
-  className: '',
-  style: {},
-  onClick: () => {},
-}
+Button.defaultProps = {}
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['default', 'outline', 'primary']),
-  fullWidth: PropTypes.bool,
-  noUppercase: PropTypes.bool,
-  alwaysActive: PropTypes.bool,
-  className: PropTypes.string,
-  style: PropTypes.object,
   onClick: PropTypes.func,
 }
 
