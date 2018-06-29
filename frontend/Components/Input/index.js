@@ -9,6 +9,10 @@ const StyledInput = styled.input`
   border: 1px solid ${props => props.theme.borderColor};
   border-radius: ${props => props.theme.borderRadius};
   outline: none;
+
+  &:focus {
+    border: 1px solid ${props => props.theme.primaryColor};
+  }
 `
 
 const Input = props => {
