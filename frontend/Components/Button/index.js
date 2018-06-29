@@ -1,36 +1,35 @@
 import React, { Component } from 'react'
-import classnames from 'classnames'
-import styles from './styles'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const StyledButton = styled.button`
+  border: 1px solid ${props => props.theme.borderColor};
+  border-radius: ${props => props.theme.borderRadius};
+  padding: 1rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: ${props => (props.primary ? 'white' : props.theme.fontColor)};
+  background: ${props => (props.primary ? props.theme.primaryColor : 'white')};
+  border-color: ${props =>
+    props.primary ? props.theme.primaryColor : props.theme.borderColor};
+  width: 100%;
+  transition: background 0.3s;
+  &:hover {
+    background: ${props =>
+      props.primary ? props.theme.primaryColorLight : 'white'};
+  }
+`
 
 class Button extends Component {
   render () {
-    const {
-      type,
-      fullWidth,
-      noUppercase,
-      className,
-      style,
-      onClick,
-      alwaysActive,
-    } = this.props
+    const { onClick } = this.props
 
     return (
-      <button
-        onClick={onClick}
-        className={classnames(
-          styles.button,
-          styles.buttonDefaults,
-          styles[type],
-          fullWidth && styles.fullWidth,
-          noUppercase && styles.noUppercase,
-          alwaysActive && styles.alwaysActive,
-          className
-        )}
-        style={style}
-      >
+      <StyledButton onClick={onClick} {...this.props}>
         {this.props.children}
-      </button>
+      </StyledButton>
     )
   }
 }

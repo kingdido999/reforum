@@ -1,12 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import styles from './styles'
+import styled from 'styled-components'
+
+const StyledInput = styled.input`
+  font-size: 1rem;
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid ${props => props.theme.borderColor};
+  border-radius: ${props => props.theme.borderRadius};
+  outline: none;
+`
 
 const Input = props => {
-  return (
-    <input className={classnames(styles.input, props.className)} {...props} />
-  )
+  return <StyledInput {...props} />
 }
 
 Input.propTypes = {

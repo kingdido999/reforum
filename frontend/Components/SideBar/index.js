@@ -12,9 +12,7 @@ class SideBar extends Component {
     return (
       <div className={styles.sidebarContainer}>
         <Link to={`/${currentForum}/new_discussion`}>
-          <Button type='outline' fullWidth noUppercase>
-            New Discussion
-          </Button>
+          <Button>New Discussion</Button>
         </Link>
       </div>
     )

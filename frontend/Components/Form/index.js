@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import FormItem from './item'
-import styles from './styles'
-import classnames from 'classnames'
+import styled from 'styled-components'
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+`
 
 const Form = ({ onSubmit, children }) => {
-  return (
-    <form onSubmit={onSubmit} className={classnames(styles.form)}>
-      {children}
-    </form>
-  )
+  return <StyledForm onSubmit={onSubmit}>{children}</StyledForm>
 }
 
 Form.Item = FormItem

@@ -63,7 +63,7 @@ class UserLogIn extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <Button type='primary'>登录</Button>
+            <Button primary>登录</Button>
           </Form.Item>
         </Form>
 

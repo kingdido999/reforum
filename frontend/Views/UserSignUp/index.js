@@ -73,7 +73,7 @@ class UserSignUp extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <Button type='primary'>注册</Button>
+            <Button primary>注册</Button>
           </Form.Item>
         </Form>
 

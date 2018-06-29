@@ -1,12 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import styles from './styles'
-import classnames from 'classnames'
+import styled from 'styled-components'
+
+const StyledFormItem = styled.div`
+  margin: 0.6rem 0;
+`
 
 const FormItem = ({ children }) => {
-  return <div className={classnames(styles.formItem)}>{children}</div>
+  return <StyledFormItem>{children}</StyledFormItem>
 }
-
-FormItem.propTypes = {}
 
 export default FormItem
