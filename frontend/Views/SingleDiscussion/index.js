@@ -149,8 +149,7 @@ class SingleDiscussion extends Component {
         <Discussion
           id={_id}
           userAvatar={avatarUrl}
-          userName={name}
-          userGitHandler={username}
+          userName={username}
           discTitle={title}
           discDate={date}
           discContent={content}
@@ -188,8 +187,7 @@ class SingleDiscussion extends Component {
                 key={opinion._id}
                 opinionId={opinion._id}
                 userAvatar={opinion.user.avatarUrl}
-                userName={opinion.user.name}
-                userGitHandler={opinion.user.username}
+                userName={opinion.user.username}
                 opDate={opinion.date}
                 opContent={opinion.content}
                 userId={opinion.user_id}

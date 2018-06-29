@@ -47,17 +47,9 @@ class Discussion extends Component {
           <img className={styles.avatar} src={userAvatar} />
           <div className={styles.columnOnSmallBP}>
             <div className={styles.userInfo}>
-              <Link to={`/user/${userGitHandler}`} className={styles.name}>
-                {userName || userGitHandler}
+              <Link to={`/user/${userName}`} className={styles.name}>
+                {userName}
               </Link>
-              <a
-                href={`https://www.github.com/${userGitHandler}`}
-                target='_blank'
-                className={styles.gitHandler}
-              >
-                <i className={classnames('fa fa-github-alt', styles.gitIcon)} />
-                <span>{userGitHandler}</span>
-              </a>
             </div>
             <div className={styles.dateInfo}>{dateDisplay}</div>
           </div>
@@ -65,7 +57,7 @@ class Discussion extends Component {
 
         <div className={styles.discTitle}>{discTitle}</div>
         <div className={styles.discContent}>
-          <RichEditor readOnly={true} value={discContent} />
+          <RichEditor readOnly value={discContent} />
         </div>
 
         <div className={styles.discFooter}>
@@ -114,14 +106,14 @@ class Discussion extends Component {
 Discussion.defaultProps = {
   id: 0,
   userAvatar: PlaceholderImage,
-  userName: 'User name',
-  userGitHandler: 'github',
-  discTitle: 'Default Discussion Title',
-  discDate: 'a day ago',
-  discContent:
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  tags: ['react', 'redux', 'webkit'],
-  favoriteCount: 1,
+  // userName: 'User name',
+  // userGitHandler: 'github',
+  // discTitle: 'Default Discussion Title',
+  // discDate: 'a day ago',
+  // discContent:
+  //   'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  // tags: ['react', 'redux', 'webkit'],
+  // favoriteCount: 1,
   favoriteAction: () => {},
   userFavorited: false,
   toggleingFavorite: false,

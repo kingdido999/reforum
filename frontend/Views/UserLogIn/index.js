@@ -63,7 +63,9 @@ class UserLogIn extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <Button primary>登录</Button>
+            <Button primary fullWidth>
+              登录
+            </Button>
           </Form.Item>
         </Form>
 

@@ -12,7 +12,6 @@ class DiscussionBox extends Component {
     const {
       voteCount,
       userName,
-      userGitHandler,
       discussionTitle,
       time,
       opinionCount,
@@ -37,17 +36,9 @@ class DiscussionBox extends Component {
 
         {!userProfile && (
           <div className={styles.posterInfo}>
-            <Link to={`/user/${userGitHandler}`} className={styles.name}>
+            <Link to={`/user/${userName}`} className={styles.name}>
               {userName}
             </Link>
-            <a
-              target='_blank'
-              href={`https://www.github.com/${userGitHandler}`}
-              className={styles.gitHandler}
-            >
-              - <i className={classnames('fa fa-github-alt', styles.gitIcon)} />{' '}
-              {userGitHandler}
-            </a>
           </div>
         )}
 
@@ -67,24 +58,10 @@ class DiscussionBox extends Component {
   }
 }
 
-DiscussionBox.defaultProps = {
-  discussionId: 1,
-  voteCount: 20,
-  userName: 'Hello World',
-  userGitHandler: 'github',
-  discussionTitle: 'This is a default post title',
-  time: Moment(),
-  opinionCount: 12,
-  tags: ['react', 'redux', 'nodejs'],
-  link: '',
-  userProfile: false,
-}
-
 DiscussionBox.propTypes = {
   discussionId: PropTypes.number,
   voteCount: PropTypes.number,
   userName: PropTypes.string,
-  userGitHandler: PropTypes.string,
   discussionTitle: PropTypes.string,
   time: PropTypes.any,
   opinionCount: PropTypes.number,

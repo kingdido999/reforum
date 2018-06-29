@@ -15,7 +15,6 @@ class Opinion extends Component {
       opinionId,
       userAvatar,
       userName,
-      userGitHandler,
       opDate,
       opContent,
       userId,
@@ -35,17 +34,9 @@ class Opinion extends Component {
         <div className={styles.infoContainer}>
           <img className={styles.avatar} src={userAvatar} />
           <div className={styles.userInfo}>
-            <Link to={`/user/${userGitHandler}`} className={styles.name}>
-              {userName || userGitHandler}
+            <Link to={`/user/${userName}`} className={styles.name}>
+              {userName}
             </Link>
-            <a
-              href={`https://www.github.com/${userGitHandler}`}
-              target='_blank'
-              className={styles.gitHandler}
-            >
-              <i className={classnames('fa fa-github-alt', styles.gitIcon)} />
-              <span>{userGitHandler}</span>
-            </a>
           </div>
           <div className={styles.dateInfo}>{dateDisplay}</div>
           {allowDelete && (
@@ -76,16 +67,7 @@ class Opinion extends Component {
 }
 
 Opinion.defaultProps = {
-  opinionId: '12345',
   userAvatar: PlaceholderImage,
-  userName: 'User name',
-  userGitHandler: 'github',
-  opDate: 'a day ago',
-  opContent:
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  userId: '12345',
-  currentUserId: '12345',
-  currentUserRole: 'user',
   deleteAction: () => {},
   deletingOpinion: null,
 }

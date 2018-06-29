@@ -67,8 +67,7 @@ class FeedBox extends Component {
                 <DiscussionBox
                   userProfile={userProfile}
                   key={discussion._id}
-                  userName={discussion.user.name || discussion.user.username}
-                  userGitHandler={discussion.user.username}
+                  userName={discussion.user.username}
                   discussionTitle={discussion.title}
                   time={discussion.date}
                   tags={discussion.tags}

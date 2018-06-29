@@ -26,7 +26,7 @@ class UserMenu extends Component {
 
   renderSubMenu () {
     const { activeSubMenu } = this.state
-    const { signedIn, gitHandler } = this.props
+    const { signedIn, userName } = this.props
 
     if (activeSubMenu) {
       return (
@@ -39,25 +39,9 @@ class UserMenu extends Component {
             <i className={classnames('fa fa-close')} />
           </Button>
 
-          {!signedIn && (
-            <div>
-              <a className={styles.signInLink} href={'/api/user/authViaGitHub'}>
-                <Button className={styles.gitLoginBtn} alwaysActive>
-                  <i
-                    className={classnames(
-                      'fa fa-github-alt',
-                      styles.subMenuOcto
-                    )}
-                  />
-                  <span className={styles.btnLabel}>GitHub</span>
-                </Button>
-              </a>
-            </div>
-          )}
-
           {signedIn && (
             <span onClick={this.toggleSubMenu}>
-              <Link className={styles.subMenuItem} to={`/user/${gitHandler}`}>
+              <Link className={styles.subMenuItem} to={`/user/${userName}`}>
                 我的账号
               </Link>
             </span>

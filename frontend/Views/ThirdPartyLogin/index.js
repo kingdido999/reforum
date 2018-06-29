@@ -11,7 +11,7 @@ const ThirdPartyLogin = () => {
 
       <Form.Item>
         <a href='/api/user/authViaGitHub'>
-          <Button>
+          <Button fullWidth>
             <FontAwesomeIcon type='github' />
           </Button>
         </a>

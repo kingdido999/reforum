@@ -13,8 +13,8 @@ const StyledButton = styled.button`
   color: ${props => props.theme.fontColor};
   background: white;
   border-color: ${props => props.theme.borderColor};
-  width: 100%;
   transition: background 0.3s;
+  cursor: pointer;
 
   /* Primary Button */
   ${props =>
@@ -26,6 +26,12 @@ const StyledButton = styled.button`
       &:hover {
         background: ${props => props.theme.primaryColorLight};
       }
+    `};
+
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
     `};
 `
 

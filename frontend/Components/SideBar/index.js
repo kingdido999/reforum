@@ -12,7 +12,7 @@ class SideBar extends Component {
     return (
       <div className={styles.sidebarContainer}>
         <Link to={`/${currentForum}/new_discussion`}>
-          <Button>New Discussion</Button>
+          <Button fullWidth>New Discussion</Button>
         </Link>
       </div>
     )

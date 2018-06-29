@@ -73,7 +73,9 @@ class UserSignUp extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <Button primary>注册</Button>
+            <Button primary fullWidth>
+              注册
+            </Button>
           </Form.Item>
         </Form>
 

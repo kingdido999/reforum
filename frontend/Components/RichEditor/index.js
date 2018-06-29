@@ -151,7 +151,7 @@ class RichEditor extends Component {
         </div>
 
         {!readOnly && (
-          <Button noUppercase style={{ alignSelf: 'center' }} onClick={onSave}>
+          <Button fullWidth style={{ alignSelf: 'center' }} onClick={onSave}>
             {saveButtonLabel}
           </Button>
         )}

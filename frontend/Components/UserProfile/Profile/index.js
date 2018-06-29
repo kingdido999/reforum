@@ -10,24 +10,24 @@ class Profile extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.avatarContainer}>
-          {avatarUrl ? (
+          {avatarUrl && (
             <img
               className={styles.avatar}
               src={avatarUrl}
               alt={`${name} avatar`}
             />
-          ) : null}
+          )}
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.name}>{name}</div>
-          {gitHandler ? (
+          {gitHandler && (
             <div className={styles.gitHandler}>
               <i className={classnames('fa fa-github-alt', styles.gitIcon)} />{' '}
               {gitHandler}
             </div>
-          ) : null}
+          )}
 
-          {location ? <div className={styles.location}>{location}</div> : null}
+          {location && <div className={styles.location}>{location}</div>}
         </div>
       </div>
     )
